@@ -17,6 +17,7 @@ class WgetSign(BaseHandler):
 
     def get(self):
         print("000")
+
         ret = []
         conf = Wconf.conf
 
