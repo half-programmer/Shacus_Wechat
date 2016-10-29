@@ -39,6 +39,7 @@ class Wpichandler(BaseHandler):
         #media_ids = json.loads(media_ids)
         #names = json.loads(names)
         for media_id, name in zip(media_ids, names):
+            print media_id
             response = self.wechat.download_media(media_id=media_id)
             with open('./{address}'.format(address=name), 'wb') as fd:
                 for chunk in response.iter_content(1024):

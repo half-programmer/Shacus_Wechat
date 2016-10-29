@@ -20,7 +20,7 @@ class WAPListphoto(BaseHandler):
         try:
             row = self.get_argument('row')
             wapmodel = WAPmodel()
-            waps = self.db.query(WAppointment).filter(WAppointment.WAPtype==0,WAppointment.WAPvalid == 1).order_by(WAppointment.WAPcreateT).offset(row).limit(5).all()
+            waps = self.db.query(WAppointment).filter(WAppointment.WAPtype==0,WAppointment.WAPvalid == 1).order_by(WAppointment.WAPcreateT).offset(int(row)).limit(5).all()
             #waps = self.db.query(WAppointment).filter(WAppointment.WAPtype == 0, WAppointment.WAPvalid == 1).order_by(
              #   WAppointment.WAPcreateT).limit(5).all()
             picurls = []
