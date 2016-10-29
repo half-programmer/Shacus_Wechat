@@ -16,6 +16,7 @@ from Wconf import Wconf
 class WgetSign(BaseHandler):
 
     def get(self):
+
         ret = []
         conf = Wconf.conf
 

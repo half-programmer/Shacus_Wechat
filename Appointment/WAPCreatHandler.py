@@ -32,7 +32,7 @@ class WAPCreatHandler(BaseHandler):
         W_content = self.get_argument('content')
         W_mediaIds = self.get_arguments('serverIds[]',strip=True)
         W_phone = self.get_argument('phone')
-        W_uid = self.db.query(User).filter(User.Utel == W_phone ).one()
+        W_uid = self.db.query(User).filter(User.Utel == W_phone).one()
         #W_mediaIds = self.get_argument('serverIds')
         #print("我是一条漂亮的分割线————————————————————————————")
         #print W_mediaIds
@@ -54,7 +54,7 @@ class WAPCreatHandler(BaseHandler):
                 WAPtime=W_time,
                 WAPvalid=0,
                 WAPstatus=1,
-                WAPsponsorid=W_uid,
+                WAPsponsorid=W_uid.Uid,
             )
             self.db.merge(new_appointment)
             try:
