@@ -21,6 +21,7 @@ class WgetSign(BaseHandler):
 
         type = self.get_argument('type')
         appsecret = self.get_argument("appsecret")
+        print("123")
         if appsecret == conf.appsecret:
             #ip = self.request.remote_ip
             #url = 'http://%s:80/WgetSign.html'%ip
@@ -29,6 +30,7 @@ class WgetSign(BaseHandler):
             url = '{}'.format(type)
             wjs = WJS(url)
             ret = wjs.sign()
+            print("456")
             callback = self.get_argument("jsoncallback")
             jsonp = "{jsfunc}({json});".format(jsfunc=callback,json=json_encode(ret))
             self.write(jsonp)
