@@ -68,10 +68,10 @@ class WAPCreatHandler(BaseHandler):
             Wap = self.db.query(WAppointment).filter(WAppointment.WAPtitle == W_title).one()
             W_apid = Wap.WAPid
             #mediaids = json.loads(W_mediaIds)
-            if wpicture.pichandler(W_mediaIds,W_mediaIds):
+            #if wpicture.pichandler(W_mediaIds,W_mediaIds):
                 #image.insert_wappointment_image(mediaids,W_apid)
-                image.insert_wappointment_image(W_mediaIds, W_apid)
-                Wap.WAPvalid = 1
-                self.db.commit()
+            image.insert_wappointment_image(W_mediaIds, W_apid)
+            Wap.WAPvalid = 1
+            self.db.commit()
             self.retjson['contents'] = '创建约拍成功'
         self.write(json.dumps(self.retjson, ensure_ascii=False, indent=2))
