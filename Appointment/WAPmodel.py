@@ -29,7 +29,7 @@ class WAPmodel(object):
             title=wap.WAPtitle,
             content=wap.WAPcontent[0:12],
             #picurl=auth.download_url(picurl),
-            picturl=picurl,
+            picurl=picurl,
             id=wap.WAPid,
             #detailurl='www.baidu.com'  #当前传的是一个假的值
             #sponsorid=wap.WAPsponsorid,

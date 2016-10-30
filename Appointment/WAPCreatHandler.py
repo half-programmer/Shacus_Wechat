@@ -74,6 +74,6 @@ class WAPCreatHandler(BaseHandler):
             Wap.WAPvalid = 1
             self.db.commit()
             self.retjson['contents'] = '创建约拍成功'
-        callback = self.get_argument("jsoncallback")
-        jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
+       # callback = self.get_argument("jsoncallback")
+       # jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
         self.write(json.dumps(self.retjson, ensure_ascii=False, indent=2))

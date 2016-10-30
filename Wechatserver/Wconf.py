@@ -83,8 +83,8 @@ class Wconf(BaseHandler):
 
     conf = WechatConf(
         token='xtIRzP0tcQuGqcgWiu',
-        appid='wx679493e73b1bd83b',#测试的id：wx679493e73b1bd83b,真实id:wx0c9dd1c77d3e5295
-        appsecret='f1dad656a7269b068834b5007991b46b',#测试秘钥;f1dad656a7269b068834b5007991b46b，真实秘钥：ed3eee4636d9ab4068c7eb5ca14ddb59
+        appid='wx0c9dd1c77d3e5295',#测试的id：wx679493e73b1bd83b,真实id:wx0c9dd1c77d3e5295
+        appsecret='ed3eee4636d9ab4068c7eb5ca14ddb59',#测试秘钥;f1dad656a7269b068834b5007991b46b，真实秘钥：ed3eee4636d9ab4068c7eb5ca14ddb59
         encrypt_mode='normal',  # 可选项：normal/compatible/safe，分别对应于 明文/兼容/安全 模式
         #encoding_aes_key='your_encoding_aes_key'  # 如果传入此值则必须保证同时传入 token, appid
         access_token_getfunc=get_access_token_function,
