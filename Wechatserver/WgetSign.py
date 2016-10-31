@@ -24,7 +24,7 @@ class WgetSign(BaseHandler):
         type = self.get_argument('type')
         appsecret = self.get_argument("appsecret")
         type = type.replace('-','&')
-        print(type)
+        print('type:::::'+type)
         print("123")
         if appsecret == conf.appsecret:
             #ip = self.request.remote_ip

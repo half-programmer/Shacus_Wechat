@@ -40,7 +40,7 @@ class UHandler(BaseHandler):
 
                     try:
                         model = self.db.query(User).filter(User.Uid == comment_user_id).one()
-                        appointment = self.db.query(WAppointment).filter(WAppointment.WAPid == apid).one()
+                        appointment = self.db.query(WAppointment).filter(WAppointment.WAPid == apid, WAppointment.WAPvalid==1).one()
                         ap_name = appointment.WAPtitle
                         model_name = model.Ualais
                         comment_entry = dict(
@@ -76,7 +76,7 @@ class UHandler(BaseHandler):
                     apid = each.WAIappoid
                     try:
                         photoer = self.db.query(User).filter(User.Uid == comment_user_id).one()
-                        appointment = self.db.query(WAppointment).filter(WAppointment.WAPid == apid).one()
+                        appointment = self.db.query(WAppointment).filter(WAppointment.WAPid == apid, WAppointment.WAPvalid == 1 ).one()
                         photoer_name = photoer.Ualais
 
                         ap_name = appointment.WAPtitle

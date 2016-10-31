@@ -23,17 +23,19 @@ class UserAplist(BaseHandler): #关于用户的一系列约拍
         aps = []
         try:
             userinfo = self.db.query(User).filter(User.Uid == uid).one()
-            uid = userinfo.Uid
             try:
                 try:
                     as_register_entries = self.db.query(WAppointEntry).filter(WAppointEntry.WAEregisterID == uid).all()
-                    for item02 in as_register_entries:
-                        ap = self.db.query(WAppointment).filter(item02.WAEapid == WAppointment.WAPid).one()
-                        aps.append(ap)
+                    for as_register_entry in as_register_entries:
+                        try:
+                            ap = self.db.query(WAppointment).filter(as_register_entry.WAEapid == WAppointment.WAPid , WAppointment.WAPvalid == 1).one()
+                            aps.append(ap)
+                        except Exception, e:
+                            print e
                 except Exception, e:
                     print "未参加过约拍"
                 try:
-                    as_sponsors_entries = self.db.query(WAppointment).filter(WAppointment.WAPsponsorid == uid).all()
+                    as_sponsors_entries = self.db.query(WAppointment).filter(WAppointment.WAPsponsorid == uid , WAppointment.WAPvalid == 1).all()
                     for appointment in as_sponsors_entries:
                         aps.append(appointment)
                 except Exception, e:

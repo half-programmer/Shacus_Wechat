@@ -137,7 +137,7 @@ class WRegisterHandler(BaseHandler):
                         self.db.commit()
                         # self.retjson['contents'] = retdata
                         new_choosed_entry = NewChoosed(
-                            uid=user.Uid,
+                            uid=m_id[0],
                             choosed=0
                         )
                         self.db.merge(new_choosed_entry)

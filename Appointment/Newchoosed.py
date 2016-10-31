@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import json
-
+import sys
+sys.path.append("..")
 from BaseHandlerh import BaseHandler
 from Database.tables import NewChoosed, User
 

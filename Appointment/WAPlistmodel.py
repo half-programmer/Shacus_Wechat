@@ -5,7 +5,7 @@
    @type：回复约拍列表
 '''
 import json
-
+from sqlalchemy import desc
 from BaseHandlerh import BaseHandler
 import sys
 sys.path.append("..")
@@ -20,7 +20,7 @@ class WAPListmodel(BaseHandler):
         try:
             row = self.get_argument('row')
             wapmodel = WAPmodel()
-            waps = self.db.query(WAppointment).filter(WAppointment.WAPtype==1,WAppointment.WAPvalid == 1).order_by(WAppointment.WAPcreateT).offset(int(row)).limit(5).all()
+            waps = self.db.query(WAppointment).filter(WAppointment.WAPtype==1,WAppointment.WAPvalid == 1).order_by(desc(WAppointment.WAPcreateT)).all()
             #waps = self.db.query(WAppointment).filter(WAppointment.WAPtype == 1, WAppointment.WAPvalid == 1).order_by(
                 #WAppointment.WAPcreateT).limit(5).all()
             picurls = []

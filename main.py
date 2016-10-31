@@ -12,7 +12,7 @@ import tornado.web
 from sqlalchemy.orm import scoped_session, sessionmaker
 from tornado.options import define, options
 
-
+from Appointment.WAPdelete import WAPdelete
 from Activity.AcAuthHandler import AcAuthHandler
 from Appointment.Newchoosed import NewChoosedHandler
 from Appointment.WAPselect import WAPselect
@@ -54,7 +54,7 @@ from Appointment.WAPfinish import WAPfinish
 #define("port", default=80, help="run on the given port", type=int)
 from RegistandLogin.WRegisterHandler import WRegisterHandler
 from RegistandLogin.WloginHandler import WLoginHandler
-define("port", default=800, help="run on the given port", type=int)
+define("port", default=80, help="run on the given port", type=int)
 
 
 
@@ -90,7 +90,7 @@ class Application(tornado.web.Application):
             (r"/weixin/appointment/registcancel",WAPregistcancel),
             (r"/weixin/appointment/selectlist",WAPselectlist),
 
-
+            (r"/weixin/appointment/delete",WAPdelete),
             (r"/weixin/appointment/UserAclist", UserAclist),
             (r"/weixin/appointment/UserAplist", UserAplist),
             (r"/weixin/appointment/Uaddimages", Uaddimages),
