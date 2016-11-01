@@ -38,7 +38,7 @@ class WAPCreatHandler(BaseHandler):
         #print W_mediaIds
 
         try:
-            appointment = self.db.query(WAppointment).filter(WAppointment.WAPtitle == W_title).one()
+            appointment = self.db.query(WAppointment).filter(WAppointment.WAPtitle == W_title,WAppointment.WAPcontent == W_content,WAppointment.WAPvalid == 1).one()
             if appointment:
                 self.retjson['code'] = '10201'
                 self.retjson['contents'] = r'该约拍已存在'
@@ -58,22 +58,23 @@ class WAPCreatHandler(BaseHandler):
             )
             self.db.merge(new_appointment)
             try:
-                self.db.commit()
+                 self.db.commit()
+                 wpicture = Wpichandler()
+           	 image = ImageHandler()
+           	 Wap = self.db.query(WAppointment).filter(WAppointment.WAPtitle == W_title,WAppointment.WAPcontent == W_content).all()
+                 for wap in Wap:
+           		 W_apid = wap.WAPid
+           		 image.insert_wappointment_image(W_mediaIds, W_apid)
+           	 	 wap.WAPvalid = 1
+           		 self.db.commit()
+			 break
+           	 self.retjson['contents'] = '创建约拍成功'
+
             except Exception,e:
-                self.db.roolback()
+                print e
+                self.db.rollback()
                 self.retjson['code'] = '10202'
                 self.retjson['contents'] = '服务器错误'
-            wpicture = Wpichandler()
-            image = ImageHandler()
-            Wap = self.db.query(WAppointment).filter(WAppointment.WAPtitle == W_title).one()
-            W_apid = Wap.WAPid
-            #mediaids = json.loads(W_mediaIds)
-            #if wpicture.pichandler(W_mediaIds,W_mediaIds):
-                #image.insert_wappointment_image(mediaids,W_apid)
-            image.insert_wappointment_image(W_mediaIds, W_apid)
-            Wap.WAPvalid = 1
-            self.db.commit()
-            self.retjson['contents'] = '创建约拍成功'
 #        callback = self.get_argument("jsoncallback")
 #        jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
         self.write(json.dumps(self.retjson, ensure_ascii=False, indent=2))
