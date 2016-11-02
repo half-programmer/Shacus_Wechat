@@ -19,6 +19,7 @@ from Appointment.WAPselect import WAPselect
 from Appointment.WAPcomment import APcommentHandler
 from Appointment.WAPlistmodel import WAPListmodel
 from Appointment.WAPtel import WAPtel
+from Appointment.WAPupdateHandler import WAPUpdateHandler
 from Database.models import engine
 from Activity.AcCreateHandler import AcCreateHandler
 
@@ -89,7 +90,7 @@ class Application(tornado.web.Application):
             (r"/weixin/appointment/regist",WAPregist),
             (r"/weixin/appointment/registcancel",WAPregistcancel),
             (r"/weixin/appointment/selectlist",WAPselectlist),
-
+            (r"/weixin/appointment/update", WAPUpdateHandler),
             (r"/weixin/appointment/delete",WAPdelete),
             (r"/weixin/appointment/UserAclist", UserAclist),
             (r"/weixin/appointment/UserAplist", UserAplist),

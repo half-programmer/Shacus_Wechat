@@ -13,7 +13,8 @@ sys.path.append("..")
 from BaseHandlerh import BaseHandler
 from Wechatserver.Wpichandler import Wpichandler
 from FileHandler.ImageHandler import ImageHandler
-class WAPCreatHandler(BaseHandler):
+
+class WAPUpdateHandler(BaseHandler):
 
     retjson = {'code':'','contents':''}
 
