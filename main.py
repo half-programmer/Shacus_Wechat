@@ -30,6 +30,7 @@ from Activity.WAcquitregist import WAquitcregist
 from  Activity.AcInfo import AcInfoHandler
 from Userinfo.Uaddimages import Uaddimages
 from Userinfo.Udeleteimages import Udeleteimages
+from Userinfo.Ugetiamge import Ugetimage
 from Userinfo.WUforgotpasswd import WUforgotpasswd
 from Userinfo.WUinfoHandler import UinfoHandler
 from Userinfo.WUinfoHandler import UinfoHandler
@@ -96,6 +97,7 @@ class Application(tornado.web.Application):
             (r"/weixin/appointment/UserAplist", UserAplist),
             (r"/weixin/appointment/Uaddimages", Uaddimages),
             (r"/weixin/appointment/Udeleteimages", Udeleteimages),
+            (r"/weixin/appointment/Uaddimages", Ugetimage),
 
             (r"/weixin/appointment/select",WAPselect),
             (r"/weixin/appointment/comment",APcommentHandler),
