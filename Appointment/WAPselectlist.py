@@ -10,7 +10,6 @@ from BaseHandlerh import BaseHandler
 from Database.tables import WAppointEntry, WAppointment, User, WApInfo
 from Appointment.WAPusermodel import wechat_user_model_simply
 
-
 class WAPselectlist(BaseHandler):
 
     retjson = {'code':'',"contents":''}
@@ -21,7 +20,6 @@ class WAPselectlist(BaseHandler):
         phone = self.get_argument('phone')
         user = self.db.query(User).filter(User.Utel == phone).one()
         m_u_id = user.Uid
-
         try:
             #exist = self.db.query(WAppointment).filter(WAppointment.WAPsponsorid == m_u_id,WAppointment.WAPid == m_ap_id).one()
             apentrys = self.db.query(WAppointEntry).filter(WAppointEntry.WAEapid == m_ap_id,WAppointEntry.WAEvalid == 1).all()
@@ -36,8 +34,7 @@ class WAPselectlist(BaseHandler):
             self.retjson['code'] = '10281'
             self.retjson['contents'] = retdata
 
-
-        except Exception,e:
+        except Exception, e:
             print e
             self.retjson['code'] ='10280'
             self.retjson['contents'] = '不是该用户发布的活动'

@@ -12,7 +12,7 @@ import tornado.web
 from sqlalchemy.orm import scoped_session, sessionmaker
 from tornado.options import define, options
 
-from Appointment.WAPdelete import WAPdelete
+from Appointment.WAPAuthdelete import WAPAuthdelete
 from Activity.AcAuthHandler import AcAuthHandler
 from Appointment.Newchoosed import NewChoosedHandler
 from Appointment.WAPselect import WAPselect
@@ -86,12 +86,12 @@ class Application(tornado.web.Application):
             (r"/weixin/login", WLoginHandler),
             (r"/weixin/activity/registerlist", WAcseeregist),
             (r"/weixin/userpage/selfinfo", UHandler),
-            (r"/weixin/appointment/info",WAPdetail),
-            (r"/weixin/appointment/regist",WAPregist),
-            (r"/weixin/appointment/registcancel",WAPregistcancel),
-            (r"/weixin/appointment/selectlist",WAPselectlist),
+            (r"/weixin/appointment/info", WAPdetail),
+            (r"/weixin/appointment/regist", WAPregist),
+            (r"/weixin/appointment/registcancel", WAPregistcancel),
+            (r"/weixin/appointment/selectlist", WAPselectlist),
             (r"/weixin/appointment/update", WAPUpdateHandler),
-            (r"/weixin/appointment/delete",WAPdelete),
+            (r"/weixin/appointment/authdelete", WAPAuthdelete),
             (r"/weixin/appointment/UserAclist", UserAclist),
             (r"/weixin/appointment/UserAplist", UserAplist),
             (r"/weixin/appointment/Uaddimages", Uaddimages),

@@ -12,9 +12,12 @@ sys.path.append("..")
 from Database.tables import WAppointment, WApImage
 from WAPmodel import WAPmodel
 from sqlalchemy import desc
+
+
 class WAPListphoto(BaseHandler):
 
     retjson = {'code': '', 'contents': ''}
+
     def get(self):
 
         try:
@@ -30,7 +33,6 @@ class WAPListphoto(BaseHandler):
             retdata =  wapmodel.wap_model_simply_more(waps,picurls)
             self.retjson['code'] = '10210'
             self.retjson['contents'] = retdata
-
 
         except Exception,e:
             print e
