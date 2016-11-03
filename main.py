@@ -15,6 +15,7 @@ from tornado.options import define, options
 from Appointment.WAPAuthdelete import WAPAuthdelete
 from Activity.AcAuthHandler import AcAuthHandler
 from Appointment.Newchoosed import NewChoosedHandler
+from Appointment.WAPdelete import WAPdelete
 from Appointment.WAPselect import WAPselect
 from Appointment.WAPcomment import APcommentHandler
 from Appointment.WAPlistmodel import WAPListmodel
@@ -93,6 +94,7 @@ class Application(tornado.web.Application):
             (r"/weixin/appointment/selectlist", WAPselectlist),
             (r"/weixin/appointment/update", WAPUpdateHandler),
             (r"/weixin/appointment/authdelete", WAPAuthdelete),
+            (r"/weixin/appointment/delete", WAPdelete),
             (r"/weixin/appointment/UserAclist", UserAclist),
             (r"/weixin/appointment/UserAplist", UserAplist),
             (r"/weixin/appointment/Uaddimages", Uaddimages),
