@@ -33,9 +33,9 @@ class WAPdelete(BaseHandler):
                 # 1为发布中，2为已确定约拍对象(进行中) 3为一方已结束 4为两方都结束
                 status = appointment.WAPstatus
                 valid = appointment.WAPvalid
-                if valid == '1':
+                if valid == 1:
                     # 发布中
-                    if status == '1':
+                    if status == 1:
                         try:
                             self.retjson['code'] = '40004'
                             self.retjson['contents'] = u'该约拍已有人报名，不能删除'
