@@ -22,6 +22,7 @@ class WAPUpdateHandler(BaseHandler):
         try:
             self.db.commit()
         except Exception, e:
+            self.db.rollback()
             self.retjson['code'] = u'500'
             self.retjson['contents'] = u"数据库提交错误"
 
