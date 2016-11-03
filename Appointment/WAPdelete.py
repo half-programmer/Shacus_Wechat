@@ -37,9 +37,10 @@ class WAPdelete(BaseHandler):
                     # 发布中
                     if status == '1':
                         try:
-                            registers = self.db.query(WAppointEntry).filter(WAppointEntry.WAEapid == apid).all()
                             self.retjson['code'] = '40004'
                             self.retjson['contents'] = u'该约拍已有人报名，不能删除'
+                            registers = self.db.query(WAppointEntry).filter(WAppointEntry.WAEapid == apid).all()
+
                         # 没有人报名
                         except Exception, e:
                             print e
