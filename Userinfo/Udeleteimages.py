@@ -22,7 +22,7 @@ class Udeleteimages(BaseHandler):#用户在个人主页删除照片
             for item in user:
                 item.HPimgvalid = False
                 self.db.commit()
-
+        self.retjson['code']='10611'
         self.retjson['contents']='删除图片成功'
         callback = self.get_argument("jsoncallback")
         jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
