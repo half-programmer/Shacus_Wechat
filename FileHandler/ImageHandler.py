@@ -2,7 +2,7 @@
 import time
 
 from Database.models import get_db
-from Database.tables import UserImage,Image, WApImage
+from Database.tables import UserImage,Image, WApImage, WAcImage
 
 '''
  创建者：兰威 黄鑫晨
@@ -14,11 +14,9 @@ class ImageHandler(object):
     # @staticmethod
     def insert_wappointment_image(self, list, wap_id):
         '''
-
         Args:
             list: 图片名字的数组
             ap_id: 微信约拍的ID
-
 
         Returns:
 
@@ -93,7 +91,7 @@ class ImageHandler(object):
         '''
         imids = self.insert(list)
         for i in range(len(imids)):
-            image = ActivityImage(
+            image = WAcImage(
                 ACIacid=ac_id,
                 ACIimid=imids[i],
                 ACIurl=list[i]
@@ -116,7 +114,7 @@ class ImageHandler(object):
         '''
         imids = self.insert(list)
         for i in range(len(imids)):
-            image = AppointmentImage(
+            image = WAcImage(
                 APIapid=ap_id,
                 APIimid=imids[i],
                 APIurl=list[i]
@@ -150,7 +148,7 @@ class ImageHandler(object):
             '''
             imids = self.insert(list)
             for i in range(len(imids)):
-                image = AppointmentImage(
+                image = WAcImage(
                     APIapid=ap_id,
                     APIimid=imids[i],
                     APIurl=list[i]
