@@ -22,8 +22,13 @@ class Udeleteimages(BaseHandler):#用户在个人主页删除照片
             for item in user:
                 item.HPimgvalid = False
                 self.db.commit()
+        imageinfo = self.db.query(Homepageimage).filter(Homepageimage.HPuser == userinfo.Uid,
+                                                        Homepageimage.HPimgvalid == 1).all()
+        retdata = []
+        for item in imageinfo:
+            retdata.append(item.HPimgurl)
         self.retjson['code']='10611'
-        self.retjson['contents']='删除图片成功'
+        self.retjson['contents']=retdata
         callback = self.get_argument("jsoncallback")
         jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
         self.write(jsonp)
