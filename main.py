@@ -29,6 +29,7 @@ from Activity.WAcListAsk import AskActivity
 from Activity.WAcregist import WAcregist
 from Activity.WAcquitregist import WAquitcregist
 from  Activity.AcInfo import AcInfoHandler
+from FileHandler.GetToken import WgetToken
 from Userinfo.Uaddimages import Uaddimages
 from Userinfo.Udeleteimages import Udeleteimages
 from Userinfo.Ugetiamge import Ugetimage
@@ -100,7 +101,7 @@ class Application(tornado.web.Application):
             (r"/weixin/appointment/Uaddimages", Uaddimages),
             (r"/weixin/appointment/Udeleteimages", Udeleteimages),
             (r"/weixin/appointment/Uaddimages", Ugetimage),
-
+            (r"/weixin/appointment/getToken", WgetToken),
             (r"/weixin/appointment/select",WAPselect),
             (r"/weixin/appointment/comment",APcommentHandler),
             (r"/weixin/appointment/finish",WAPfinish),
