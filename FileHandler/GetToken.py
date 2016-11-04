@@ -13,15 +13,13 @@ from FileHandler.Upload import AuthKeyHandler
 
 class WgetToken(BaseHandler):
 
-    retjson = {'code': '', "contents": ''}
+    retjson = {"uptoken":"xxx:xxx:xxx"}
     def get(self):
         utel = self.get_argument('vali')
         try:
             user = self.db.query(User).filter(User.Utel == utel).one()
             authhandler = AuthKeyHandler()
-            self.retjson['code'] = '200'
-            self.retjson['contents'] = authhandler.get_token_web_one()
+            self.retjson['uptoken'] = authhandler.get_token_web_one()
         except Exception:
-            self.retjson['code'] = '400'
-            self.retjson['contents'] = u'用户认证出错'
+            self.retjson['uptoken'] = u'用户认证出错'
         self.write(json.dumps(self.retjson, ensure_ascii=False, indent=2))  # 返回中文
