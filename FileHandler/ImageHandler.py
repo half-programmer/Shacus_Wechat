@@ -11,17 +11,17 @@ from Database.tables import UserImage,Image, WApImage, WAcImage
 class ImageHandler(object):
     #def __init__(self):
 
-    def change_wap_image(self,img_urls, wap_id):
+    def change_wap_image(self, img_urls, wap_id):
 
             db = get_db()
             for img_url in img_urls:
                 # 如果原来有这张图
                 try:
-                    wap_img = db.filter(WApImage).filter(WApImage.WAPIurl == img_url).one()
+                    wap_img = db.query(WApImage).filter(WApImage.WAPIurl == img_url).one()
                     wap_img.WAPIvalid = 1
                 # 如果原来没有
                 except Exception, e:
-                    print e
+                    print 'fdfdf' + e
                     imids = self.insert_wappointment_image(img_url, wap_id)
             try:
                 db.commit()

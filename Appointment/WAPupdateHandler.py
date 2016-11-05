@@ -41,8 +41,6 @@ class WAPUpdateHandler(BaseHandler):
                         appointment.WAPcontent = W_content,  # 活动介绍
                         self.commit()
                         try:
-                            self.db.commit()
-                            wpicture = Wpichandler()
                             image = ImageHandler()
                             # # 删除旧的
                             image.delete_wappointment_image(apid)
