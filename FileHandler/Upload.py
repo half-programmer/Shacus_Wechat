@@ -15,6 +15,10 @@ class AuthKeyHandler:
         self.secret_key = 'GFWHU9hYkU4hepDwpWfHaNDt3gJCDsAk3Kz6DGdk'
         self.Auth_key = Auth(self.access_key, self.secret_key)
         self.auth_tokens = []
+    def get_token_web_one(self):
+        bucket_name = 'shacus'  # 要上传的空间
+        token = self.Auth_key.upload_token(bucket_name, expires=345600)
+        return token
     # 构建鉴权对象
     def generateToken(self,names):
        bucket_name = 'shacus' # 要上传的空间
@@ -31,8 +35,11 @@ class AuthKeyHandler:
     def download_url(self,name):
         auth = self.get_auth_key()
         bucket_domain = 'oci8c6557.bkt.clouddn.com'
-        base_url  = 'http://%s/%s' % (bucket_domain, name )
+        base_url = 'http://%s/%s' % (bucket_domain, name)
         private_url =auth.private_download_url(base_url, expires=3600)
         return private_url
+
+
+
 
 

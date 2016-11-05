@@ -146,7 +146,6 @@ def entry(bucket, key):
     """计算七牛API中的数据格式:
 
     entry规格参考 http://developer.qiniu.com/docs/v6/api/reference/data-formats.html
-
     Args:
         bucket: 待操作的空间名
         key:    待操作的文件名

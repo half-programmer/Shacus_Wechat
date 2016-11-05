@@ -2,7 +2,7 @@
 import time
 
 from Database.models import get_db
-from Database.tables import UserImage,Image, WApImage
+from Database.tables import UserImage,Image, WApImage, WAcImage
 
 '''
  创建者：兰威 黄鑫晨
@@ -11,18 +11,33 @@ from Database.tables import UserImage,Image, WApImage
 class ImageHandler(object):
     #def __init__(self):
 
+    def change_wap_image(self, img_urls, wap_id):
+
+            db = get_db()
+            for img_url in img_urls:
+                # 如果原来有这张图
+                try:
+                    wap_img = db.query(WApImage).filter(WApImage.WAPIurl == img_url).one()
+                    wap_img.WAPIvalid = 1
+                # 如果原来没有
+                except Exception, e:
+                    print 'fdfdf' + e
+                    imids = self.insert_wappointment_image(img_url, wap_id)
+            try:
+                db.commit()
+            except Exception, e:
+                print e
+
     # @staticmethod
     def insert_wappointment_image(self, list, wap_id):
         '''
-
         Args:
             list: 图片名字的数组
             ap_id: 微信约拍的ID
-
-
         Returns:
-
         '''
+        # 先过滤
+
         imids = self.insert(list)
         for i in range(len(imids)):
             image = WApImage(
@@ -34,6 +49,22 @@ class ImageHandler(object):
             db.merge(image)
             db.commit()
 
+    def delete_wappointment_image(self, ap_id):
+        '''
+        Args:
+            list: 图片名字的数组
+            ap_id: 微信约拍的ID
+        Returns:
+        '''
+        db = get_db()
+        try:
+            ap_imgs = db.query(WApImage).filter(WApImage.WAPIapid == ap_id).all()
+            for ap_img in ap_imgs:
+                ap_img.WAPIvalid = 0
+            db.commit()
+        except Exception, e:
+            print e
+
     # @staticmethod
     def insert(self,list):
         '''
@@ -42,17 +73,17 @@ class ImageHandler(object):
         :table: 应该插入的表名
         :return:
         '''
+        db = get_db()
         new_imids=[]
         for img_name in list:  # 第一步，向Image里表里插入
             image = Image(
-                IMvalid=True,
-                IMT=time.strftime('%Y-%m-%d %H:%M:%S'),
-                IMname = img_name
-            )
-            db=get_db()
+                    IMvalid=1,
+                    IMT=time.strftime('%Y-%m-%d %H:%M:%S'),
+                    IMname=img_name
+                )
             db.merge(image)
             db.commit()
-            new_img = get_db().query(Image).filter(Image.IMname == img_name).one()
+            new_img = db.query(Image).filter(Image.IMname == img_name).one()
             imid = new_img.IMid
             new_imids.append(imid)
         return new_imids
@@ -93,7 +124,7 @@ class ImageHandler(object):
         '''
         imids = self.insert(list)
         for i in range(len(imids)):
-            image = ActivityImage(
+            image = WAcImage(
                 ACIacid=ac_id,
                 ACIimid=imids[i],
                 ACIurl=list[i]
@@ -116,7 +147,7 @@ class ImageHandler(object):
         '''
         imids = self.insert(list)
         for i in range(len(imids)):
-            image = AppointmentImage(
+            image = WAcImage(
                 APIapid=ap_id,
                 APIimid=imids[i],
                 APIurl=list[i]
@@ -150,7 +181,7 @@ class ImageHandler(object):
             '''
             imids = self.insert(list)
             for i in range(len(imids)):
-                image = AppointmentImage(
+                image = WAcImage(
                     APIapid=ap_id,
                     APIimid=imids[i],
                     APIurl=list[i]

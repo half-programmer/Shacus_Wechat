@@ -9,7 +9,7 @@ r :兰威
 @datatime：2016.10.10
 '''
 from Database.models import get_db
-from Database.tables import User
+from Database.tables import User, WApImage
 from FileHandler.Upload import AuthKeyHandler
 
 class WAPmodel(object):
@@ -36,7 +36,7 @@ class WAPmodel(object):
             ret_ap = dict(
                 title=wap.WAPtitle,
                 content=wap.WAPcontent[0:12],
-                picurl=picurl,
+                picurl=auth.download_url(picurl),
                 id=wap.WAPid,
                 #detailurl='www.baidu.com'  #当前传的是一个假的值
                 #sponsorid=wap.WAPsponsorid,
@@ -83,7 +83,7 @@ class WAPmodel(object):
         '''
         status_item = wap.WAPstatus
         if(status_item == 3):
-        	status_item = 2
+           status_item = 2
         db = get_db()
         user = db.query(User).filter(User.Uid == wap.WAPsponsorid).one()
         u_alias = user.Ualais
@@ -91,7 +91,7 @@ class WAPmodel(object):
         auth = AuthKeyHandler()
         picture_data = []
         for pic in picurls:
-            picture_data.append(pic)
+            picture_data.append(auth.download_url(pic))
         ret_ap = dict(
             title=wap.WAPtitle,
             content=wap.WAPcontent,
@@ -111,6 +111,31 @@ class WAPmodel(object):
             isregist=isre,
             ischoosed=isco,
             user=userlist,
+        )
+        return ret_ap
+
+    def wap_model_getchangeinfo(self, wap):
+        '''
+
+        Args:
+            wap:约拍实例
+
+        Returns:
+
+        '''
+        db = get_db()
+        pics = db.query(WApImage).filter(WApImage.WAPIapid == wap.WAPid, WApImage.WAPIvalid == 1).all()
+
+        auth = AuthKeyHandler()
+        picurls = []
+        keys = []
+        for pic in pics:
+            picurls.append(auth.download_url(pic.WAPIurl))
+            keys.append(pic.WAPIurl)
+        ret_ap = dict(
+            contents=wap.WAPcontent,
+            picurl=picurls,
+            key=keys,
         )
         return ret_ap
 

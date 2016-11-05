@@ -110,8 +110,9 @@ class WApImage(Base):
     __tablename__ = 'WApImage'
 
     WAPIapid = Column(Integer, ForeignKey("WAppointment.WAPid", onupdate="CASCADE"))
-    WAPIimid = Column(Integer, ForeignKey("Image.IMid",onupdate="CASCADE"), primary_key=True)
+    WAPIimid = Column(Integer, ForeignKey("Image.IMid", onupdate="CASCADE"), primary_key=True)
     WAPIurl = Column(VARCHAR(128))
+    WAPIvalid = Column(Boolean, default=1, nullable=False)
 
 
 class WApInfo(Base):

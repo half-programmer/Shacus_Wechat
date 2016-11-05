@@ -13,7 +13,7 @@ from Database.tables import User
 from RegistandLogin.WloginHandler import md5
 
 class UinfoHandler(BaseHandler):
-    retjson = {'code':'', 'contents':''}
+    retjson = {'code': '', 'contents': ''}
 
     def commit(self):
         try:
@@ -34,8 +34,6 @@ class UinfoHandler(BaseHandler):
         callback = self.get_argument("jsoncallback")
         try:
             user = self.db.query(User).filter(User.Utel == utel).one()
-            old_password = user.Upassword  # 旧密码
-
             if user:
                 if type == '1':  # 修改邮箱
                     mailbox = self.get_argument('mailbox')
@@ -46,8 +44,8 @@ class UinfoHandler(BaseHandler):
                     else:
                         self.retjson['code'] = '40001'
                         self.retjson['contents'] = u'邮箱格式错误'
-
-                if type == '2':  # 修改密码
+                elif type == '2':  # 修改密码
+                    old_password = user.Upassword  # 旧密码
                     o_password = self.get_argument('old_password')
                     if old_password == md5(o_password):
                         new_password = self.get_argument('new_password')
@@ -58,6 +56,13 @@ class UinfoHandler(BaseHandler):
                     else:  # 旧密码错误
                         self.retjson['code'] = u'40002'
                         self.retjson['contents'] = u'旧密码错误'
+
+                elif type == '3':  # 修改签名
+                    new_sign = self.get_argument('sign')
+                    user.Usign = new_sign
+                    self.retjson['code'] = '20003'
+                    self.retjson['contents'] = u'修改签名成功'
+                    self.commit()
         except Exception, e:
             print e
             self.retjson['code'] = '40000'

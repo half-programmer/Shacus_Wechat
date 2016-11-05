@@ -60,15 +60,15 @@ class WAPCreatHandler(BaseHandler):
             try:
                  self.db.commit()
                  wpicture = Wpichandler()
-           	 image = ImageHandler()
-           	 Wap = self.db.query(WAppointment).filter(WAppointment.WAPtitle == W_title,WAppointment.WAPcontent == W_content).all()
+                 image = ImageHandler()
+                 Wap = self.db.query(WAppointment).filter(WAppointment.WAPtitle == W_title,WAppointment.WAPcontent == W_content).all()
                  for wap in Wap:
-           		 W_apid = wap.WAPid
-           		 image.insert_wappointment_image(W_mediaIds, W_apid)
-           	 	 wap.WAPvalid = 1
-           		 self.db.commit()
-			 break
-           	 self.retjson['contents'] = '创建约拍成功'
+                     W_apid = wap.WAPid
+                     image.insert_wappointment_image(W_mediaIds, W_apid)
+                     wap.WAPvalid = 1
+                     self.db.commit()
+                     break
+                 self.retjson['contents'] = '创建约拍成功'
 
             except Exception,e:
                 print e

@@ -22,6 +22,7 @@ class WAPUpdateHandler(BaseHandler):
         try:
             self.db.commit()
         except Exception, e:
+            self.db.rollback()
             self.retjson['code'] = u'500'
             self.retjson['contents'] = u"数据库提交错误"
 
@@ -37,14 +38,14 @@ class WAPUpdateHandler(BaseHandler):
                                                              WAppointment.WAPvalid == 1).one()
                 if appointment:
                     if appointment.WAPsponsorid == user.Uid:
-                        appointment.WAPcontent = W_content,  # 活动介绍
+                        appointment.WAPcontent = W_content  # 活动介绍
                         self.commit()
                         try:
-                            self.db.commit()
-                            wpicture = Wpichandler()
                             image = ImageHandler()
-                            # 找到要修改的约拍
-                            image.insert_wappointment_image(W_mediaIds, apid)
+                            # # 删除旧的
+                            image.delete_wappointment_image(apid)
+                            # 上传新的
+                            image.change_wap_image(W_mediaIds, apid)
                             self.retjson['code'] = 200
                             self.retjson['contents'] = '修改约拍成功'
                             self.commit()

@@ -49,7 +49,7 @@ class WAPdetail(BaseHandler):
                         r_id = apinfo.WAIpid
                         user = self.db.query(User).filter(User.Uid == r_id).one()
                         userlist = wechat_user_model_select_simply(user)
-            wap_picturls = self.db.query(WApImage).filter(WApImage.WAPIapid == m_apid).all()
+            wap_picturls = self.db.query(WApImage).filter(WApImage.WAPIapid == m_apid, WApImage.WAPIvalid == 1).all()
             for pic in wap_picturls:
                 wap_pic.append(pic.WAPIurl)
             type = wap.WAPtype

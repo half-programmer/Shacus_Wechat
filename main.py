@@ -12,9 +12,11 @@ import tornado.web
 from sqlalchemy.orm import scoped_session, sessionmaker
 from tornado.options import define, options
 
-from Appointment.WAPdelete import WAPdelete
+from Appointment.WAPAuthdelete import WAPAuthdelete
 from Activity.AcAuthHandler import AcAuthHandler
 from Appointment.Newchoosed import NewChoosedHandler
+from Appointment.WAPdelete import WAPdelete
+from Appointment.WAPgetchangeinfo import WAPgetchangeinfo
 from Appointment.WAPselect import WAPselect
 from Appointment.WAPcomment import APcommentHandler
 from Appointment.WAPlistmodel import WAPListmodel
@@ -28,6 +30,8 @@ from Activity.WAcListAsk import AskActivity
 from Activity.WAcregist import WAcregist
 from Activity.WAcquitregist import WAquitcregist
 from  Activity.AcInfo import AcInfoHandler
+from FileHandler.GetToken import WgetToken
+from FileHandler.Getpicture import Getpicture
 from Userinfo.Uaddimages import Uaddimages
 from Userinfo.Udeleteimages import Udeleteimages
 from Userinfo.Ugetiamge import Ugetimage
@@ -71,6 +75,7 @@ class Application(tornado.web.Application):
             (r"/", IndexHandler),
             #(r"/",WBasic),
             (r"/weixin/user/changeinfo", UinfoHandler),
+
             (r"/weixin/user/newchoosed", NewChoosedHandler),
             (r"/weixin/activity/getauth", AcAuthHandler),
             (r"/weixin/activity/create", AcCreateHandler),
@@ -87,24 +92,28 @@ class Application(tornado.web.Application):
             (r"/weixin/login", WLoginHandler),
             (r"/weixin/activity/registerlist", WAcseeregist),
             (r"/weixin/userpage/selfinfo", UHandler),
-            (r"/weixin/appointment/info",WAPdetail),
-            (r"/weixin/appointment/regist",WAPregist),
-            (r"/weixin/appointment/registcancel",WAPregistcancel),
-            (r"/weixin/appointment/selectlist",WAPselectlist),
+            (r"/weixin/appointment/info", WAPdetail),
+            (r"/weixin/appointment/regist", WAPregist),
+            (r"/weixin/appointment/registcancel", WAPregistcancel),
+            (r"/weixin/appointment/selectlist", WAPselectlist),
             (r"/weixin/appointment/update", WAPUpdateHandler),
-            (r"/weixin/appointment/delete",WAPdelete),
+            (r"/weixin/appointment/getupdateinfo",WAPgetchangeinfo),
+            (r"/weixin/appointment/authdelete", WAPAuthdelete),
+            (r"/weixin/appointment/delete", WAPdelete),
             (r"/weixin/appointment/UserAclist", UserAclist),
             (r"/weixin/appointment/UserAplist", UserAplist),
             (r"/weixin/appointment/Uaddimages", Uaddimages),
             (r"/weixin/appointment/Udeleteimages", Udeleteimages),
             (r"/weixin/appointment/Uaddimages", Ugetimage),
-
-            (r"/weixin/appointment/select",WAPselect),
+            (r"/weixin/appointment/getToken", WgetToken),
+            (r"/weixin/appointment/select", WAPselect),
             (r"/weixin/appointment/comment",APcommentHandler),
-            (r"/weixin/appointment/finish",WAPfinish),
-            (r"/weixin/forgotpasswd",WUforgotpasswd),
-            (r"/weixin/appointment/tel",WAPtel),
-            (r"/weixin/user/judge",WUserjudge)
+            (r"/weixin/appointment/finish", WAPfinish),
+            (r"/weixin/forgotpasswd", WUforgotpasswd),
+            (r"/weixin/appointment/tel", WAPtel),
+            (r"/weixin/user/judge", WUserjudge),
+            (r"/weixin/getpicurl", Getpicture),
+
         ]
 
         settings = {
