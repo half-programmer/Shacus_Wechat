@@ -38,7 +38,7 @@ class WAPUpdateHandler(BaseHandler):
                                                              WAppointment.WAPvalid == 1).one()
                 if appointment:
                     if appointment.WAPsponsorid == user.Uid:
-                        appointment.WAPcontent = W_content,  # 活动介绍
+                        appointment.WAPcontent = W_content  # 活动介绍
                         self.commit()
                         try:
                             image = ImageHandler()
