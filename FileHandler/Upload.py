@@ -16,8 +16,8 @@ class AuthKeyHandler:
         self.Auth_key = Auth(self.access_key, self.secret_key)
         self.auth_tokens = []
     def get_token_web_one(self):
-        bucket_name = 'wechattest'  # 要上传的空间
-        token = self.Auth_key.upload_token(bucket_name, 345600)
+        bucket_name = 'shacus'  # 要上传的空间
+        token = self.Auth_key.upload_token(bucket_name, expires=345600)
         return token
     # 构建鉴权对象
     def generateToken(self,names):
