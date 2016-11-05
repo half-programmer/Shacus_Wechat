@@ -16,6 +16,7 @@ from Appointment.WAPAuthdelete import WAPAuthdelete
 from Activity.AcAuthHandler import AcAuthHandler
 from Appointment.Newchoosed import NewChoosedHandler
 from Appointment.WAPdelete import WAPdelete
+from Appointment.WAPgetchangeinfo import WAPgetchangeinfo
 from Appointment.WAPselect import WAPselect
 from Appointment.WAPcomment import APcommentHandler
 from Appointment.WAPlistmodel import WAPListmodel
@@ -74,6 +75,7 @@ class Application(tornado.web.Application):
             (r"/", IndexHandler),
             #(r"/",WBasic),
             (r"/weixin/user/changeinfo", UinfoHandler),
+
             (r"/weixin/user/newchoosed", NewChoosedHandler),
             (r"/weixin/activity/getauth", AcAuthHandler),
             (r"/weixin/activity/create", AcCreateHandler),
@@ -95,6 +97,7 @@ class Application(tornado.web.Application):
             (r"/weixin/appointment/registcancel", WAPregistcancel),
             (r"/weixin/appointment/selectlist", WAPselectlist),
             (r"/weixin/appointment/update", WAPUpdateHandler),
+            (r"/weixin/appointment/getupdateinfo",WAPgetchangeinfo),
             (r"/weixin/appointment/authdelete", WAPAuthdelete),
             (r"/weixin/appointment/delete", WAPdelete),
             (r"/weixin/appointment/UserAclist", UserAclist),
@@ -110,6 +113,7 @@ class Application(tornado.web.Application):
             (r"/weixin/appointment/tel", WAPtel),
             (r"/weixin/user/judge", WUserjudge),
             (r"/weixin/getpicurl", Getpicture),
+
         ]
 
         settings = {

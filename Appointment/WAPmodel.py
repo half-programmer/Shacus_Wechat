@@ -9,7 +9,7 @@ r :兰威
 @datatime：2016.10.10
 '''
 from Database.models import get_db
-from Database.tables import User
+from Database.tables import User, WApImage
 from FileHandler.Upload import AuthKeyHandler
 
 class WAPmodel(object):
@@ -111,6 +111,31 @@ class WAPmodel(object):
             isregist=isre,
             ischoosed=isco,
             user=userlist,
+        )
+        return ret_ap
+
+    def wap_model_getchangeinfo(self, wap):
+        '''
+
+        Args:
+            wap:约拍实例
+
+        Returns:
+
+        '''
+        db = get_db()
+        pics = db.query(WApImage).filter(WApImage.WAPIapid == wap.WAPid, WApImage.WAPIvalid == 1).all()
+
+        auth = AuthKeyHandler()
+        picurls = []
+        keys = []
+        for pic in pics:
+            picurls.append(auth.download_url(pic.WAPIurl))
+            keys.append(pic.WAPIurl)
+        ret_ap = dict(
+            contents=wap.WAPcontent,
+            picurl=picurls,
+            key=keys,
         )
         return ret_ap
 
