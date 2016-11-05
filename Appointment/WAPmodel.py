@@ -83,7 +83,7 @@ class WAPmodel(object):
         '''
         status_item = wap.WAPstatus
         if(status_item == 3):
-        	status_item = 2
+           status_item = 2
         db = get_db()
         user = db.query(User).filter(User.Uid == wap.WAPsponsorid).one()
         u_alias = user.Ualais
@@ -91,11 +91,11 @@ class WAPmodel(object):
         auth = AuthKeyHandler()
         picture_data = []
         for pic in picurls:
-            picture_data.append(pic)
+            picture_data.append(auth.download_url(pic))
         ret_ap = dict(
             title=wap.WAPtitle,
             content=wap.WAPcontent,
-            picurl=auth.download_url(picture_data),
+            picurl=picture_data,
             id=wap.WAPid,
             alias=u_alias,
             # detailurl='www.baidu.com'  #当前传的是一个假的值
