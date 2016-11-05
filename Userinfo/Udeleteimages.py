@@ -13,9 +13,9 @@ from Wechatserver.Wpichandler import Wpichandler
 class Udeleteimages(BaseHandler):#用户在个人主页删除照片
     retjson={'code':'200','contents':'null'}
     def get(self):
-        u_phone = self.get_argument('phone')
+        u_id = self.get_argument('phone')
         images = self.get_argument('images[]',strip=True)
-        userinfo = self.db.query(User).filter(User.Utel == u_phone).one()#为了获取用户id
+        userinfo = self.db.query(User).filter(User.Uid == u_id).one()#为了获取用户手机
         retimages = []
         for i in images:
             user = self.db.query(Homepageimage).filter(Homepageimage.HPuser == userinfo.Uid , Homepageimage.HPimgurl==images).all()

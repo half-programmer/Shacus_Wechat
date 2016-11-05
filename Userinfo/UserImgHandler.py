@@ -32,14 +32,24 @@ class UserImgHandler(object):
             print e
 
     def insert(self,list):
+            db=get_db()
             new_imids = []
-            for img_name in list:  # 第一步，向Image里表里插入
+            newlist = []
+            for item in list:
+                 ifimage=db.query(Image).filter(Image.IMname == item).all()
+                 if len(ifimage)== 0:
+                    newlist.append(item)
+                 else:
+                     ifimage.IMvalid = 1
+                     db.commit()
+
+            for img_name in newlist:  # 第一步，向Image里表里插入
                 image = Image(
                     IMvalid = True,
                     IMT = time.strftime('%Y-%m-%d %H:%M:%S'),
                     IMname = img_name,
                 )
-                db = get_db()
+
                 db.merge(image)
                 db.commit()
                 try:
