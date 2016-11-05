@@ -18,7 +18,8 @@ class WAPgetchangeinfo(BaseHandler):
         id =self.get_argument("id")
 
         try:
-            uid = self.db.query(User).filter(User.Utel == phone).one()
+            user = self.db.query(User).filter(User.Utel == phone).one()
+            uid = user.Uid
             try:
                 wap = self.db.query(WAppointment).filter(WAppointment.WAPid == id,WAppointment.WAPsponsorid == uid ).one()
                 ret_ap = WAPmodel.wap_model_getchangeinfo(wap)
