@@ -17,9 +17,7 @@ class ImageHandler(object):
         Args:
             list: 图片名字的数组
             ap_id: 微信约拍的ID
-
         Returns:
-
         '''
         imids = self.insert(list)
         for i in range(len(imids)):
@@ -31,6 +29,22 @@ class ImageHandler(object):
             db = get_db()
             db.merge(image)
             db.commit()
+
+    def delete_wappointment_image(self, ap_id):
+        '''
+        Args:
+            list: 图片名字的数组
+            ap_id: 微信约拍的ID
+        Returns:
+        '''
+        db = get_db()
+        try:
+            ap_imgs = db.query(WApImage).filter(WApImage.WAPIapid == ap_id).all()
+            for ap_img in ap_imgs:
+                ap_img.WAPIvalid = 0
+            db.commit()
+        except Exception, e:
+            print e
 
     # @staticmethod
     def insert(self,list):
@@ -45,7 +59,7 @@ class ImageHandler(object):
             image = Image(
                 IMvalid=True,
                 IMT=time.strftime('%Y-%m-%d %H:%M:%S'),
-                IMname = img_name
+                IMname=img_name
             )
             db=get_db()
             db.merge(image)
