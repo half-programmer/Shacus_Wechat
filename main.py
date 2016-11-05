@@ -30,6 +30,7 @@ from Activity.WAcregist import WAcregist
 from Activity.WAcquitregist import WAquitcregist
 from  Activity.AcInfo import AcInfoHandler
 from FileHandler.GetToken import WgetToken
+from FileHandler.Getpicture import Getpicture
 from Userinfo.Uaddimages import Uaddimages
 from Userinfo.Udeleteimages import Udeleteimages
 from Userinfo.Ugetiamge import Ugetimage
@@ -107,7 +108,8 @@ class Application(tornado.web.Application):
             (r"/weixin/appointment/finish",WAPfinish),
             (r"/weixin/forgotpasswd",WUforgotpasswd),
             (r"/weixin/appointment/tel",WAPtel),
-            (r"/weixin/user/judge",WUserjudge)
+            (r"/weixin/user/judge",WUserjudge),
+            (r"/weixin/getpicurl",Getpicture),
         ]
 
         settings = {
