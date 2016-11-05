@@ -44,10 +44,10 @@ class WAPUpdateHandler(BaseHandler):
                             self.db.commit()
                             wpicture = Wpichandler()
                             image = ImageHandler()
-                            # 删除旧的
+                            # # 删除旧的
                             image.delete_wappointment_image(apid)
                             # 上传新的
-                            image.insert_wappointment_image(W_mediaIds, apid)
+                            image.change_wap_image(W_mediaIds, apid)
                             self.retjson['code'] = 200
                             self.retjson['contents'] = '修改约拍成功'
                             self.commit()

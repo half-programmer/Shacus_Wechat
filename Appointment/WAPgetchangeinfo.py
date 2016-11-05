@@ -8,21 +8,21 @@ import json
 
 from BaseHandlerh import BaseHandler
 from Database.tables import WAppointment, User
-from Appointment.WAPmodel import WAPmodel
+from WAPmodel import WAPmodel
 
 class WAPgetchangeinfo(BaseHandler):
 
     retjson = {'code': '', 'contents': ''}
     def get(self):
         phone = self.get_argument("vali")
-        id =self.get_argument("id")
-
+        id = self.get_argument("id")
+        wapmodel = WAPmodel()
         try:
             user = self.db.query(User).filter(User.Utel == phone).one()
             uid = user.Uid
             try:
-                wap = self.db.query(WAppointment).filter(WAppointment.WAPid == id,WAppointment.WAPsponsorid == uid ).one()
-                ret_ap = WAPmodel.wap_model_getchangeinfo(wap)
+                wap = self.db.query(WAppointment).filter(WAppointment.WAPid == id, WAppointment.WAPsponsorid == uid ).one()
+                ret_ap = wapmodel.wap_model_getchangeinfo(wap)
                 self.retjson['code'] = '11102'
                 self.retjson['contents'] = ret_ap
             except Exception,e:
