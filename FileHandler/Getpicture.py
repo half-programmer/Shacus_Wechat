@@ -13,7 +13,7 @@ from FileHandler.Upload import AuthKeyHandler
 
 class Getpicture(BaseHandler):
 
-    retjson = {'code': '', 'contents': ''}
+    retjson = {'code': '', 'contents': '', 'key':''}
     def get(self):
         phone = self.get_argument("vali")
         picname = self.get_argument("key")
@@ -23,6 +23,7 @@ class Getpicture(BaseHandler):
             picurl = auth.download_url(picname)
             self.retjson['code'] = '10901'
             self.retjson['contents'] = picurl
+            self.retjson['key'] = picname
         except Exception,e:
             self.retjson['code'] = '10900'
             self.retjson['contents'] = '用户不存在'

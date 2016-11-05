@@ -103,13 +103,13 @@ class Application(tornado.web.Application):
             (r"/weixin/appointment/Udeleteimages", Udeleteimages),
             (r"/weixin/appointment/Uaddimages", Ugetimage),
             (r"/weixin/appointment/getToken", WgetToken),
-            (r"/weixin/appointment/select",WAPselect),
+            (r"/weixin/appointment/select", WAPselect),
             (r"/weixin/appointment/comment",APcommentHandler),
-            (r"/weixin/appointment/finish",WAPfinish),
-            (r"/weixin/forgotpasswd",WUforgotpasswd),
-            (r"/weixin/appointment/tel",WAPtel),
-            (r"/weixin/user/judge",WUserjudge),
-            (r"/weixin/getpicurl",Getpicture),
+            (r"/weixin/appointment/finish", WAPfinish),
+            (r"/weixin/forgotpasswd", WUforgotpasswd),
+            (r"/weixin/appointment/tel", WAPtel),
+            (r"/weixin/user/judge", WUserjudge),
+            (r"/weixin/getpicurl", Getpicture),
         ]
 
         settings = {
