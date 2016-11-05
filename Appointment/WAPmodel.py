@@ -36,7 +36,7 @@ class WAPmodel(object):
             ret_ap = dict(
                 title=wap.WAPtitle,
                 content=wap.WAPcontent[0:12],
-                picurl=picurl,
+                picurl=auth.download_url(picurl),
                 id=wap.WAPid,
                 #detailurl='www.baidu.com'  #当前传的是一个假的值
                 #sponsorid=wap.WAPsponsorid,
@@ -95,7 +95,7 @@ class WAPmodel(object):
         ret_ap = dict(
             title=wap.WAPtitle,
             content=wap.WAPcontent,
-            picurl=picture_data,
+            picurl=auth.download_url(picture_data),
             id=wap.WAPid,
             alias=u_alias,
             # detailurl='www.baidu.com'  #当前传的是一个假的值
