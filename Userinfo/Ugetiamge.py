@@ -6,7 +6,7 @@ import json
 
 
 class Ugetimage(BaseHandler):
-    retjson={'code':'200'}
+    retjson={'code':'200','contents':'null'}
     def get(self):
         u_id = self.get_argument('id')
         try:
@@ -17,8 +17,9 @@ class Ugetimage(BaseHandler):
             retdata = []
             for item in imageinfo:
                 url = auth.download_url(item.HPimgurl)
-                self.retjson[item.HPimgurl]= url
+                retdata.append(url)
             self.retjson['code'] = '10612'
+            self.retjson['contents']=retdata
         except Exception,e:
             print e
         callback = self.get_argument("jsoncallback")

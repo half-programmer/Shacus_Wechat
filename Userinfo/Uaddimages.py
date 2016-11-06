@@ -13,7 +13,7 @@ class Uaddimages(BaseHandler):#用户在个人主页增加图片
     retjson={'code':'200','contents':'none'}
 
     def get(self):
-        u_id = self.get_argument('phone')
+        u_id = self.get_argument('id')
         images = self.get_arguments('images[]',strip=True)
 
         image = UserImgHandler()
