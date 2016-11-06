@@ -25,7 +25,7 @@ class WAPselectlist(BaseHandler):
             apentrys = self.db.query(WAppointEntry).filter(WAppointEntry.WAEapid == m_ap_id,WAppointEntry.WAEvalid == 1).all()
             retdata = []
             try:
-                ap = self.db.query(WAppointment).filter(WAppointment.WAPsponsorid == m_u_id).one()
+                ap = self.db.query(WAppointment).filter(WAppointment.WAPsponsorid == m_u_id,WAppointment.WAPid == m_ap_id).one()
                 for apentry in apentrys:
                     userid = apentry.WAEregisterID
                     user = self.db.query(User).filter(User.Uid == userid).one()
