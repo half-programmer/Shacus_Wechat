@@ -75,6 +75,6 @@ class WAPCreatHandler(BaseHandler):
                 self.db.rollback()
                 self.retjson['code'] = '10202'
                 self.retjson['contents'] = '服务器错误'
-#        callback = self.get_argument("jsoncallback")
-#        jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
+                #callback = self.get_argument("jsoncallback")
+                #jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
         self.write(json.dumps(self.retjson, ensure_ascii=False, indent=2))
