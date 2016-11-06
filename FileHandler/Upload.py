@@ -35,7 +35,7 @@ class AuthKeyHandler:
     def download_url(self,name):
         auth = self.get_auth_key()
         bucket_domain = 'oci8c6557.bkt.clouddn.com'
-        base_url = 'http://%s/%s?imageView2/2/h/2000' % (bucket_domain, name)
+        base_url = 'http://%s/%s?imageView2/2/h/1000' % (bucket_domain, name)
         private_url =auth.private_download_url(base_url, expires=3600)
         return private_url
     def download_abb_url(self,name):
