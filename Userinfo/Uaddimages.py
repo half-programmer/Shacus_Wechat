@@ -19,14 +19,19 @@ class Uaddimages(BaseHandler):#用户在个人主页增加图片
         image = UserImgHandler()
         try:
             userinfo = self.db.query(User).filter(User.Uid == u_id).one()  # 获取用户手机
-            image.insert_Homepage_image(images, userinfo.Utel)
+            image.delete_Homepage_image(userinfo.Utel)
+            image.change_Homepage_image(images , userinfo.Utel)
             self.db.commit()
-            imageinfo = self.db.query(Homepageimage).filter(Homepageimage.HPuser == userinfo.Uid ,Homepageimage.HPimgvalid==1).all()
-            retdata = []
-            for item in imageinfo:
-               retdata.append(item.HPimgurl)
+
+            #服务器测试代码(查看数据库是否修改)：
+            # imageinfo = self.db.query(Homepageimage).filter(Homepageimage.HPuser == userinfo.Uid ,Homepageimage.HPimgvalid==1).all()
+            # retdata = []
+            # for item in imageinfo:
+            #    retdata.append(item.HPimgurl)
+
+
             self.retjson['code']='10610'
-            self.retjson['contents'] = retdata
+            self.retjson['contents'] = '修改成功'
         except Exception,e:
             print e
         callback = self.get_argument("jsoncallback")

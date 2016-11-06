@@ -11,6 +11,42 @@ from Database.tables import Image, Homepageimage, User
 
 
 class UserImgHandler(object):
+    def delete_Homepage_image(self,utel):#先注释掉该用户的所有图片
+
+        try:
+            db = get_db()
+            userinfo = db.query(User).filter(User.Utel == utel).one()
+            allimage=  db.query(Homepageimage).filter(Homepageimage.HPuser == userinfo.Uid).all()
+            for item in allimage:
+                item.HPimgvalid = 0
+            db.commit()
+
+        except Exception ,e:
+            print e
+            print 'the user doesn\'t exsit'
+    def change_Homepage_image(self,list,utel):#改变图片信息
+        try:
+            db=get_db()
+            usertel = db.query(User).filter(User.Utel == utel).one()
+            for item in list:#如果有那么重置为1，如果没有就继续保持0
+                try:
+                    userimage = db.query(Homepageimage).filter(Homepageimage.HPuser == usertel.Uid , Homepageimage.HPimgurl == item).one()
+                    userimage.HPimgvalid = 1
+                    db.commit()
+
+
+
+                except Exception ,e:#新的需要插入
+                    print 'insert new Homepageimage'
+                    itemlist = []
+                    itemlist.append(item)
+                    self.insert_Homepage_image(itemlist,utel)
+        except Exception,e:
+            print e
+            print 'doesn\'t exsit'
+
+
+
     def insert_Homepage_image(self,list,utel):
 
         try:
@@ -34,16 +70,8 @@ class UserImgHandler(object):
     def insert(self,list):
             db=get_db()
             new_imids = []
-            newlist = []
-            for item in list:
-                 ifimage=db.query(Image).filter(Image.IMname == item).all()
-                 if len(ifimage)== 0:
-                    newlist.append(item)
-                 else:
-                     ifimage.IMvalid = 1
-                     db.commit()
 
-            for img_name in newlist:  # 第一步，向Image里表里插入
+            for img_name in list:  # 第一步，向Image里表里插入
                 image = Image(
                     IMvalid = True,
                     IMT = time.strftime('%Y-%m-%d %H:%M:%S'),
