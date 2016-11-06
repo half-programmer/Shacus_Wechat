@@ -15,11 +15,14 @@ class Ugetimage(BaseHandler):
             imageinfo = self.db.query(Homepageimage).filter(Homepageimage.HPuser == userinfo.Uid,
                                                             Homepageimage.HPimgvalid == 1).all()
             retdata = []
+            retkey = []
             for item in imageinfo:
                 url = auth.download_url(item.HPimgurl)
+                retkey.append(item.HPimgurl)
                 retdata.append(url)
             self.retjson['code'] = '10612'
-            self.retjson['contents']=retdata
+            self.retjson['contents'] = retdata
+            self.retjson['key'] = retkey
         except Exception,e:
             print e
         callback = self.get_argument("jsoncallback")

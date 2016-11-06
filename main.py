@@ -60,7 +60,7 @@ from Appointment.WAPfinish import WAPfinish
 #define("port", default=80, help="run on the given port", type=int)
 from RegistandLogin.WRegisterHandler import WRegisterHandler
 from RegistandLogin.WloginHandler import WLoginHandler
-define("port", default=800, help="run on the given port", type=int)
+define("port", default=80, help="run on the given port", type=int)
 
 
 
