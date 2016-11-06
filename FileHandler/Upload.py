@@ -38,6 +38,22 @@ class AuthKeyHandler:
         base_url = 'http://%s/%s' % (bucket_domain, name)
         private_url =auth.private_download_url(base_url, expires=3600)
         return private_url
+    def download_abb_url(self,name):
+        '''
+        下载略缩图链接
+        Args:
+            name: 图片名字
+
+        Returns:图片下载地址
+
+        '''
+        auth = self.get_auth_key()
+        bucket_domain = 'oci8c6557.bkt.clouddn.com'
+        base_url = 'http://%s/%s?imageView2/2/w/400' % (bucket_domain, name)
+        private_url =auth.private_download_url(base_url, expires=3600)
+        #private_url = private_url+"&imageView2/2/w/200"
+        return private_url
+
 
 
 

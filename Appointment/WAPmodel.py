@@ -1,4 +1,3 @@
-
 # -*-coding:utf-8 -*-
 '''
 @author :兰威
@@ -28,7 +27,7 @@ class WAPmodel(object):
         try:
             status_item = wap.WAPstatus
             if(status_item == 3):
-            	status_item = 2  
+            	status_item = 2
             user = db.query(User).filter(User.Uid == wap.WAPsponsorid).one()
             u_alias = user.Ualais
             u_sex = user.Usex
@@ -36,7 +35,7 @@ class WAPmodel(object):
             ret_ap = dict(
                 title=wap.WAPtitle,
                 content=wap.WAPcontent[0:12],
-                picurl=auth.download_url(picurl),
+                picurl=auth.download_abb_url(picurl),
                 id=wap.WAPid,
                 #detailurl='www.baidu.com'  #当前传的是一个假的值
                 #sponsorid=wap.WAPsponsorid,
@@ -138,5 +137,6 @@ class WAPmodel(object):
             key=keys,
         )
         return ret_ap
+
 
 
