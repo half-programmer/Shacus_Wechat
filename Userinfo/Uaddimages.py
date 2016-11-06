@@ -34,6 +34,8 @@ class Uaddimages(BaseHandler):#用户在个人主页增加图片
             self.retjson['contents'] = '修改成功'
         except Exception,e:
             print e
+            self.retjson['code'] = '10610'
+            self.retjson['contents'] = '没有找到该用户'
         callback = self.get_argument("jsoncallback")
         jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
         self.write(jsonp)
