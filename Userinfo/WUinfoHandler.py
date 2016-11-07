@@ -31,7 +31,7 @@ class UinfoHandler(BaseHandler):
     def get(self):
         utel = self.get_argument('utel')
         type = self.get_argument('type')
-        callback = self.get_argument("jsoncallback")
+        #callback = self.get_argument("jsoncallback")
         try:
             user = self.db.query(User).filter(User.Utel == utel).one()
             if user:
@@ -68,5 +68,5 @@ class UinfoHandler(BaseHandler):
             self.retjson['code'] = '40000'
             self.retjson['contents'] = u'该用户不存在'
 
-        jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
-        self.write(jsonp)
+        #jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
+        self.write(json.dumps(self.retjson, ensure_ascii=False, indent=2))
