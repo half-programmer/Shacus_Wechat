@@ -92,7 +92,6 @@ class Application(tornado.web.Application):
             (r"/weixin/regist", WRegisterHandler),
             (r"/weixin/login", WLoginHandler),
             (r"/weixin/activity/registerlist", WAcseeregist),
-            (r"/weixin/user/userlist", WgetUserList),
             (r"/weixin/userpage/selfinfo", UHandler),
             (r"/weixin/appointment/info", WAPdetail),
             (r"/weixin/appointment/regist", WAPregist),
