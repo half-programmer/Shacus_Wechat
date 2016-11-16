@@ -22,7 +22,9 @@ class ImageHandler(object):
                 # 如果原来没有
                 except Exception, e:
                     print 'fdfdf' + e
-                    imids = self.insert_wappointment_image(img_url, wap_id)
+                    newimg = []
+                    newimg.append(img_url)
+                    imids = self.insert_wappointment_image(newimg, wap_id)
             try:
                 db.commit()
             except Exception, e:

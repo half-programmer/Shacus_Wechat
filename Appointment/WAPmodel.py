@@ -1,4 +1,3 @@
-
 # -*-coding:utf-8 -*-
 '''
 @author :兰威
@@ -9,7 +8,7 @@ r :兰威
 @datatime：2016.10.10
 '''
 from Database.models import get_db
-from Database.tables import User, WApImage
+from Database.tables import User, WApImage, WApFinish
 from FileHandler.Upload import AuthKeyHandler
 
 class WAPmodel(object):
@@ -28,7 +27,7 @@ class WAPmodel(object):
         try:
             status_item = wap.WAPstatus
             if(status_item == 3):
-            	status_item = 2  
+            	status_item = 2
             user = db.query(User).filter(User.Uid == wap.WAPsponsorid).one()
             u_alias = user.Ualais
             u_sex = user.Usex
@@ -36,7 +35,7 @@ class WAPmodel(object):
             ret_ap = dict(
                 title=wap.WAPtitle,
                 content=wap.WAPcontent[0:12],
-                picurl=auth.download_url(picurl),
+                picurl=auth.download_abb_url(picurl),
                 id=wap.WAPid,
                 #detailurl='www.baidu.com'  #当前传的是一个假的值
                 #sponsorid=wap.WAPsponsorid,
@@ -68,7 +67,7 @@ class WAPmodel(object):
         return retedate
 
 
-    def wap_model_mutiple(self,wap,picurls,issp,isre,isco,userlist):
+    def wap_model_mutiple(self,wap,picurls,issp,isre,isco,userlist,m_id):
         '''
 
         Args:
@@ -81,10 +80,15 @@ class WAPmodel(object):
         Returns:
 
         '''
+        db = get_db()
         status_item = wap.WAPstatus
         if(status_item == 3):
-           status_item = 2
-        db = get_db()
+            finishmen = db.query(WApFinish).filter(WApFinish.WAFapid == wap.WAPid,WApFinish.WAFuid == m_id).all()
+            if finishmen:
+                status_item = 3
+            else :
+                status_item = 2
+
         user = db.query(User).filter(User.Uid == wap.WAPsponsorid).one()
         u_alias = user.Ualais
         u_sex = user.Usex
@@ -138,5 +142,6 @@ class WAPmodel(object):
             key=keys,
         )
         return ret_ap
+
 
 

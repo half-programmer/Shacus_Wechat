@@ -104,9 +104,9 @@ class Application(tornado.web.Application):
             (r"/weixin/appointment/delete", WAPdelete),
             (r"/weixin/appointment/UserAclist", UserAclist),
             (r"/weixin/appointment/UserAplist", UserAplist),
-            (r"/weixin/appointment/Uaddimages", Uaddimages),
-            (r"/weixin/appointment/Udeleteimages", Udeleteimages),
-            (r"/weixin/appointment/Uaddimages", Ugetimage),
+            (r"/weixin/appointment/Uchangeimages", Uaddimages),
+
+            (r"/weixin/appointment/Ugetimages", Ugetimage),
             (r"/weixin/appointment/getToken", WgetToken),
             (r"/weixin/appointment/select", WAPselect),
             (r"/weixin/appointment/comment",APcommentHandler),

@@ -33,6 +33,7 @@ class User(Base): # 用户表   #添加聊天专用chattoken
     Usign = Column(VARCHAR(256))
     Usessionid = Column(VARCHAR(32))    #用于验证用户
     Uvalid = Column(Integer, nullable=False, default=1)
+    Uage = Column(Integer,nullable=False,default=0)
 
 
 

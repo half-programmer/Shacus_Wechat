@@ -25,7 +25,7 @@ class UserAplist(BaseHandler): #关于用户的一系列约拍
             userinfo = self.db.query(User).filter(User.Uid == uid).one()
             try:
                 try:
-                    as_register_entries = self.db.query(WAppointEntry).filter(WAppointEntry.WAEregisterID == uid).all()
+                    as_register_entries = self.db.query(WAppointEntry).filter(WAppointEntry.WAEregisterID == uid,WAppointEntry.WAEvalid == 1).all()
                     for as_register_entry in as_register_entries:
                         try:
                             ap = self.db.query(WAppointment).filter(as_register_entry.WAEapid == WAppointment.WAPid , WAppointment.WAPvalid == 1).one()

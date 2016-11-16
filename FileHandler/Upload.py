@@ -17,7 +17,8 @@ class AuthKeyHandler:
         self.auth_tokens = []
     def get_token_web_one(self):
         bucket_name = 'shacus'  # 要上传的空间
-        token = self.Auth_key.upload_token(bucket_name, expires=345600)
+        policy = {"mimeLimit": "image/*"}
+        token = self.Auth_key.upload_token(bucket_name, expires=345600,policy=policy)
         return token
     # 构建鉴权对象
     def generateToken(self,names):
@@ -25,7 +26,8 @@ class AuthKeyHandler:
        tokens = []
        for title in names:
            print 'title:',title
-           token = self.Auth_key.upload_token(bucket_name, title, 345600)
+           policy = {"mimeLimit": "image/*"}
+           token = self.Auth_key.upload_token(bucket_name, title, 345600,policy)
            self.auth_tokens.append(token)
        return self.auth_tokens
     def get_auth_key(self):
@@ -35,9 +37,25 @@ class AuthKeyHandler:
     def download_url(self,name):
         auth = self.get_auth_key()
         bucket_domain = 'oci8c6557.bkt.clouddn.com'
-        base_url = 'http://%s/%s' % (bucket_domain, name)
+        base_url = 'http://%s/%s?imageView2/2/h/1000' % (bucket_domain, name)
         private_url =auth.private_download_url(base_url, expires=3600)
         return private_url
+    def download_abb_url(self,name):
+        '''
+        下载略缩图链接
+        Args:
+            name: 图片名字
+
+        Returns:图片下载地址
+
+        '''
+        auth = self.get_auth_key()
+        bucket_domain = 'oci8c6557.bkt.clouddn.com'
+        base_url = 'http://%s/%s?imageView2/2/w/400' % (bucket_domain, name)
+        private_url =auth.private_download_url(base_url, expires=3600)
+        #private_url = private_url+"&imageView2/2/w/200"
+        return private_url
+
 
 
 

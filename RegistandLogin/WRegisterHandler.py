@@ -99,6 +99,7 @@ class WRegisterHandler(BaseHandler):
             m_nick_name=self.get_argument('nickName')  # 昵称
             m_phone=self.get_argument('phone')
             m_sex = self.get_argument('sex')    #性别
+            #m_age =self.get_argument('age')
             try:
                 m_phone = base64.encodestring(m_phone)
                 m_phone = m_phone.replace("\n","")
@@ -113,6 +114,7 @@ class WRegisterHandler(BaseHandler):
                         Ualais=m_nick_name,
                         Utel=m_phone,
                         Usex=m_sex,
+                        #Uage = m_age,
                     )
                     self.db.merge(new_user)
                     try:
