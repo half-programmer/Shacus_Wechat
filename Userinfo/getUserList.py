@@ -4,28 +4,22 @@ import json
 from Database.tables import  User, WAcEntry, WActivity
 
 '''
-@author:兰威
+@author: 黄鑫晨
 '''
-from BaseHandlerh import  BaseHandler
+from BaseHandlerh import BaseHandler
 from Userinfo.Usermodel import wechat_user_model_simply
 from Userinfo.Usermodel import decode_base64
-class WAcseeregist(BaseHandler):
+class WgetUserList(BaseHandler):
 
     '''
-    查看报名用户
+    获得用户列表
     '''
     retjson = {'code':'','contents':''}
     def get(self):
-
-        acid = self.get_argument('acid')
-        acid = decode_base64(acid)
         try:
-            exist = self.db.query(WActivity).filter(WActivity.WACid == acid).one()
-            data = self.db.query(WAcEntry).filter(WAcEntry.WACEacid == acid,WAcEntry.WACEregistvalid == 1).all()
+            users = self.db.query(User).all()
             retdata = []
-            for item in data:
-                userid = item.WACEregisterid
-                user = self.db.query(User).filter(User.Uid == userid).one()
+            for user in users:
                 retdata_item = wechat_user_model_simply(user)
                 retdata.append(retdata_item)
             self.retjson['code'] = '10400'
