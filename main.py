@@ -42,6 +42,7 @@ from Userinfo.UserAclist import UserAclist
 from Userinfo.UserAplist import UserAplist
 from Userinfo.WUserhomepager import UHandler
 from Userinfo.WUserjudge import WUserjudge
+from Userinfo.getUserList import WgetUserList
 from Wechatserver.Wver import Wver
 from Activity.WAcListAsk import AskActivity
 from Activity.WAcregist import WAcregist

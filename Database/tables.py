@@ -104,7 +104,7 @@ class WAppointment(Base):
     WAPtype = Column(Boolean, nullable=False, default=0)  # 约拍类型，模特约摄影师(1)或摄影师约模特(0)
     WAPvalid = Column(Boolean, default=1, nullable=False)
     WAPregistN = Column(Integer, nullable=False, default=0)
-    WAPstatus = Column(Integer, nullable=False, default=0)  # 1为发布中，2为已确定约拍对象(进行中) 3为一方已结束 4为两方都结束
+    WAPstatus = Column(Integer, nullable=False, default=0)  # 1为发布中，2为已确 定约拍对象(进行中) 3为一方已结束 4为两方都结束
 
 
 class WApImage(Base):
