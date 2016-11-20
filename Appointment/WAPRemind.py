@@ -7,8 +7,9 @@
 import datetime
 
 from BaseHandlerh import BaseHandler
-from Database.tables import WAppointment, WApInfo
-from messsage import selectmessage
+from Database.tables import WAppointment, WApInfo, User
+from Userinfo.Usermodel import decode_base64
+from messsage import  remindmessage
 
 
 class WAPRemind(BaseHandler):
@@ -25,5 +26,15 @@ class WAPRemind(BaseHandler):
                 # 是否选择了用户，未选择则发送提醒短信
                 # chooser = self.db.query(WApInfo).filter(WApInfo.WAIappoid == WAP.WAPid,WApInfo.WAIvalid == 1).all()
                 # if not chooser:
-                selectmessage(15151861978,'lalala',1312312312)
+                #selectmessage('15151861978','lalala','1312312312')
+                try:
+                    user = self.db.query(User).filter(User.Uid == WAP.WAPsponsorid).one()
+                    phone = decode_base64(user.Utel)
+                    remindmessage(phone,WAP.WAPtitle)
+                    WAP.WAPremind = 1
+                    self.db.commit()
+                except Exception,e:
+                    print e
+
+
 

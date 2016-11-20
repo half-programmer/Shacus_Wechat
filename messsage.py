@@ -19,3 +19,11 @@ def selectmessage(phone=00000000000,appointment='lalala',selectphone=00000000000
    str = resp.read()
    if (str):
       print(str)
+
+def remindmessage(phone=00000000000,appointment='lalala'):
+   url = "http://imlaixin.cn/Api/send/data/json?accesskey=5025&secretkey=754c1c14fdda4935c127af9d9331447ed752de97&mobile=" + phone + "&content=尊敬的追影用户您好，您的约拍 "+appointment+" 已经有人报名了，记得常查看约拍，选择您满意的用户！【追影】"
+   req = urllib2.Request(url)
+   resp = urllib2.urlopen(req)
+   str = resp.read()
+   if (str):
+      print(str)
