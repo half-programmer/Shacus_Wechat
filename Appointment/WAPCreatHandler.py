@@ -55,6 +55,7 @@ class WAPCreatHandler(BaseHandler):
                 WAPvalid=0,
                 WAPstatus=1,
                 WAPsponsorid=W_uid.Uid,
+                WAPremind=0
             )
             self.db.merge(new_appointment)
             try:

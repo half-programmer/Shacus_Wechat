@@ -105,7 +105,7 @@ class WAppointment(Base):
     WAPvalid = Column(Boolean, default=1, nullable=False)
     WAPregistN = Column(Integer, nullable=False, default=0)
     WAPstatus = Column(Integer, nullable=False, default=0)  # 1为发布中，2为已确 定约拍对象(进行中) 3为一方已结束 4为两方都结束
-
+    WAPremind = Column(Boolean,nullable=False,default=0)
 
 class WApImage(Base):
     __tablename__ = 'WApImage'

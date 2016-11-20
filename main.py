@@ -15,6 +15,7 @@ from tornado.options import define, options
 from Appointment.WAPAuthdelete import WAPAuthdelete
 from Activity.AcAuthHandler import AcAuthHandler
 from Appointment.Newchoosed import NewChoosedHandler
+from Appointment.WAPRemind import WAPRemind
 from Appointment.WAPdelete import WAPdelete
 from Appointment.WAPgetchangeinfo import WAPgetchangeinfo
 from Appointment.WAPselect import WAPselect
@@ -114,6 +115,7 @@ class Application(tornado.web.Application):
             (r"/weixin/appointment/tel", WAPtel),
             (r"/weixin/user/judge", WUserjudge),
             (r"/weixin/getpicurl", Getpicture),
+            (r"/weixin/appointment/remind",WAPRemind)
 
         ]
 
