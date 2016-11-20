@@ -14,6 +14,7 @@ from messsage import selectmessage
 class WAPRemind(BaseHandler):
 
     def get(self):
+        print("进入提醒阶段\n_____________")
         #查询未提醒的报名中的且有效且有人报名的约拍
         WAPs = self.db.query(WAppointment).filter(WAppointment.WAPremind == 0,WAppointment.WAPvalid == 1,
                                                   WAppointment.WAPregistN > 0,WAppointment.WAPstatus == 1).all()
