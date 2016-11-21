@@ -21,7 +21,7 @@ class WAcseeregist(BaseHandler):
         if acid == 'nvoaie3132fdjanfe==fe02nc9kas01238nfxklsf':
             try:
                 retdata = []
-                users = self.db.query(User).filter(User.Uvalid==1).all()
+                users = self.db.query(User).filter(User.Uvalid == 1).all()
                 for user in users:
                     retdata_item = wechat_user_model_simply(user)
                     retdata.append(retdata_item)
