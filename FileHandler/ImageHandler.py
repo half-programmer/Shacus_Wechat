@@ -92,6 +92,7 @@ class ImageHandler(object):
 
     # @staticmethod
     def insert_user_image(self, list, uid):
+        # type: (object, object) -> object
         '''
 
         Args:

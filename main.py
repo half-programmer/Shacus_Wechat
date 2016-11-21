@@ -37,6 +37,7 @@ from Userinfo.Uaddimages import Uaddimages
 from Userinfo.Udeleteimages import Udeleteimages
 from Userinfo.Ugetiamge import Ugetimage
 from Userinfo.WUforgotpasswd import WUforgotpasswd
+from Userinfo.WUhimgup import WUhimgup
 from Userinfo.WUinfoHandler import UinfoHandler
 from Userinfo.WUinfoHandler import UinfoHandler
 from Userinfo.UserAclist import UserAclist
@@ -114,7 +115,8 @@ class Application(tornado.web.Application):
             (r"/weixin/appointment/tel", WAPtel),
             (r"/weixin/user/judge", WUserjudge),
             (r"/weixin/getpicurl", Getpicture),
-            (r"/weixin/appointment/remind",WAPRemind)
+            (r"/weixin/appointment/remind",WAPRemind),
+            (r"weixin/user/headimage",WUhimgup)
 
         ]
 
