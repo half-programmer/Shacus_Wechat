@@ -13,7 +13,7 @@ from tornado.concurrent import Future
 from tornado.web import asynchronous
 
 from BaseHandlerh import BaseHandler
-from Database.tables import  User, NewChoosed
+from Database.tables import  User, NewChoosed, Homepageimage
 from Userinfo import Usermodel
 #from Userinfo.Ufuncs import Ufuncs
 from Userinfo.Usermodel import Model_daohanglan
@@ -27,7 +27,7 @@ def md5(str):  # 加密
 
 class WLoginHandler(BaseHandler):
 
-    retjson = {'code': '', 'contents': u'未处理 '}
+    retjson = {'code': '', 'contents': u'未处理 ', 'upic': 0}
 
 
     @asynchronous
@@ -42,7 +42,7 @@ class WLoginHandler(BaseHandler):
         if not m_phone or not m_password:
             self.retjson['code'] = 400
             self.retjson['contents'] = 10105  # '用户名密码不能为空'
-        #todo:登录返回json的retdata多一层[]，客户端多0.5秒处理时间
+        # todo:登录返回json的retdata多一层[]，客户端多0.5秒处理时间
         # 防止重复注册
         else:
             try:
@@ -55,6 +55,15 @@ class WLoginHandler(BaseHandler):
                             phone=m_phone,
                             id=user.Uid
                         )
+
+                        # 判断形象墙是否有图片
+                        try:
+                            hp_imgs = self.db.query(Homepageimage).filter(Homepageimage.HPuser == user.Uid).one()
+                            if hp_imgs:
+                                self.retjson['upic'] = 1
+                        except Exception, e:
+                            self.retjson['upic'] = 0
+                            print e
                         self.retjson['code'] = 10004  # success
                     else:
                         self.retjson['contents'] = u'密码错误'
