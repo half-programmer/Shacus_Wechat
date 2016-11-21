@@ -23,7 +23,7 @@ class WUserjudge(BaseHandler):
             exist = self.db.query(User).filter(User.Uid == u_id, User.Utel == phone).one()
             # 判断形象墙是否有图片
             try:
-                hp_imgs = self.db.query(Homepageimage).filter(Homepageimage.HPuser == exist.Uid).one()
+                hp_imgs = self.db.query(Homepageimage).filter(Homepageimage.HPuser == exist.Uid).limit(1).one()
                 if hp_imgs:
                     self.retjson['upic'] = 1
             except Exception, e:
