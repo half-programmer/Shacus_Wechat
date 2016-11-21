@@ -146,10 +146,13 @@ class UHandler(BaseHandler):
                         user_other = self.db.query(User).filter(User.Uid == uid_other).one()
                         u_alais_other = user_other.Ualais
                         usex = user_other.Usex
+                        sign = user_other.Usign
                         if usex:
                             self.retjson['sex'] = int(usex)
                         if u_alais_other:
                             self.retjson['alais'] = u_alais_other
+                        if sign:
+                            self.retjson['sign'] = sign
                         self.get_comment(uid_other)
                         auth_key_handler = AuthKeyHandler()
                         img_tokens = []
