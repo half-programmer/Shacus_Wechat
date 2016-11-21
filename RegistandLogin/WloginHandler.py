@@ -58,7 +58,7 @@ class WLoginHandler(BaseHandler):
 
                         # 判断形象墙是否有图片
                         try:
-                            hp_imgs = self.db.query(Homepageimage).filter(Homepageimage.HPuser == user.Uid).limit(1).one()
+                            hp_imgs = self.db.query(Homepageimage).filter(Homepageimage.HPuser == user.Uid,Homepageimage.HPimgvalid == 1).limit(1).one()
                             if hp_imgs:
                                 self.retjson['upic'] = 1
                         except Exception, e:
