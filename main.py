@@ -116,7 +116,7 @@ class Application(tornado.web.Application):
             (r"/weixin/user/judge", WUserjudge),
             (r"/weixin/getpicurl", Getpicture),
             (r"/weixin/appointment/remind",WAPRemind),
-            (r"weixin/user/headimage",WUhimgup)
+            (r"/weixin/user/headimage",WUhimgup)
 
         ]
 
