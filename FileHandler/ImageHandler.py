@@ -162,8 +162,9 @@ class ImageHandler(object):
 
     def change_user_headimage(self,newimage,uid):
         db = get_db()
-        images = db.query(UserImage).filter(UserImage.UIuid == uid).all()
+        images = db.query(UserImage).filter(UserImage.UIuid == uid,UserImage.UIvalid == 1).all()
         for image in images:
+            image.UIvalid = 0
             image_id = image.UIimid
             im = db.query(Image).filter(Image.IMid == image_id).one()
             if im.IMvalid == 1:

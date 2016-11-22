@@ -60,6 +60,7 @@ class UserImage(Base):
     UIuid = Column(Integer,ForeignKey("User.Uid", onupdate="CASCADE"))
     UIimid = Column(Integer,ForeignKey("Image.IMid", onupdate="CASCADE"), primary_key=True)
     UIurl = Column(VARCHAR(128))
+    UIvalid = Column(Boolean, default=1, nullable=False)
 
 
 class WCourse(Base):
