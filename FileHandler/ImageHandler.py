@@ -77,6 +77,7 @@ class ImageHandler(object):
         '''
         db = get_db()
         new_imids=[]
+        imid = ''
         for img_name in list:  # 第一步，向Image里表里插入
             image = Image(
                     IMvalid=1,
@@ -85,8 +86,9 @@ class ImageHandler(object):
                 )
             db.merge(image)
             db.commit()
-            new_img = db.query(Image).filter(Image.IMname == img_name).one()
-            imid = new_img.IMid
+            new_imgs = db.query(Image).filter(Image.IMname == img_name).all()
+            for new_img in new_imgs:
+                imid = new_img.IMid
             new_imids.append(imid)
         return new_imids
 
