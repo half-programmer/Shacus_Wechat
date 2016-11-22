@@ -8,7 +8,7 @@ r :兰威
 @datatime：2016.10.10
 '''
 from Database.models import get_db
-from Database.tables import User, WApImage, WApFinish
+from Database.tables import User, WApImage, WApFinish, UserImage
 from FileHandler.Upload import AuthKeyHandler
 
 class WAPmodel(object):
@@ -27,10 +27,11 @@ class WAPmodel(object):
         try:
             status_item = wap.WAPstatus
             if(status_item == 3):
-            	status_item = 2
+                status_item = 2
             user = db.query(User).filter(User.Uid == wap.WAPsponsorid).one()
             u_alias = user.Ualais
             u_sex = user.Usex
+            headimg = db.query(UserImage).filter(UserImage.UIuid == wap.WAPsponsorid,UserImage.UIvalid == 1).one()
             auth = AuthKeyHandler()
             ret_ap = dict(
                 title=wap.WAPtitle,
@@ -44,6 +45,7 @@ class WAPmodel(object):
                 type=int(wap.WAPtype),
                 status = status_item,
                 registn = wap.WAPregistN,
+                headimg=auth.download_abb_url(headimg.UIurl)
             )
             return ret_ap
         except Exception, e:
@@ -94,6 +96,7 @@ class WAPmodel(object):
         u_sex = user.Usex
         auth = AuthKeyHandler()
         picture_data = []
+        headimg = db.query(UserImage).filter(UserImage.UIuid == wap.WAPsponsorid, UserImage.UIvalid == 1).one()
         for pic in picurls:
             picture_data.append(auth.download_url(pic))
         ret_ap = dict(
@@ -115,6 +118,7 @@ class WAPmodel(object):
             isregist=isre,
             ischoosed=isco,
             user=userlist,
+            headimg=auth.download_abb_url(headimg.UIurl)
         )
         return ret_ap
 

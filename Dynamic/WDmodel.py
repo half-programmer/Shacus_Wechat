@@ -4,7 +4,7 @@
 @type：微信的动态模型
 @datatime：2016.11.22
 '''
-from Database.tables import UserImage
+from Database.tables import UserImage, User
 from Database.models import get_db
 from FileHandler.Upload import AuthKeyHandler
 
@@ -73,6 +73,8 @@ class WDmodel(object):
             himg_url = u_himg.UIurl
             auth = AuthKeyHandler()
             pic_urls = []
+            user = db.query(User).filter(User.Uid == u_id,User.Uvalid == 1).one()
+            u_alias = user.Ualais
             for picurl in picurls:
                 pic_urls.append(auth.download_url(picurl.WDIurl))
             ret_ap = dict(
@@ -81,6 +83,7 @@ class WDmodel(object):
                 uid=u_id,
                 # detailurl='www.baidu.com'  #当前传的是一个假的值
                 # sponsorid=wap.WAPsponsorid,
+                alias = u_alias,
                 did=wd.WDid,
                 dimgs=pic_urls,
             )
