@@ -270,4 +270,28 @@ class NewChoosed(Base):
     uid = Column(Integer, ForeignKey('User.Uid', onupdate='CASCADE'))
     choosed = Column(Boolean, nullable=False, default=0)  # 0为没有新选择， 1则有新选择
 
+class WDynamic(Base):
+    '''
+    @author : 兰威
+    @name : 发布动态的详细信息
+    '''
+    __tablename__ = 'WDynamic'
+
+    WDid = Column(Integer, primary_key=True)  #动态id
+    WDsponsorid = Column(Integer, ForeignKey('User.Uid', onupdate='CASCADE'))  # 动态发起者
+    WDcreateT = Column(DateTime(timezone=True), default=func.now())  # 动态创建时间
+    WDcontents = Column(VARCHAR(256))  #动态描述
+    WDvalid = Column(Boolean, default=1, nullable=False) #动态是否有效
+
+class WDImage(Base):
+    '''
+     @author : 兰威
+    @name : 动态图片
+    '''
+    __tablename__ ='WDImage'
+
+    WDIwdid = Column(Integer, ForeignKey("WDynamic.WDid", onupdate="CASCADE"))
+    WDIimid = Column(Integer, ForeignKey("Image.IMid", onupdate="CASCADE"), primary_key=True)
+    WDIurl = Column(VARCHAR(128))
+    WDIvalid = Column(Boolean, default=1, nullable=False)
 

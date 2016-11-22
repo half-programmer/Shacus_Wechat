@@ -31,6 +31,9 @@ from Activity.WAcListAsk import AskActivity
 from Activity.WAcregist import WAcregist
 from Activity.WAcquitregist import WAquitcregist
 from  Activity.AcInfo import AcInfoHandler
+from Dynamic.WDcreatehandler import WDcreatehandler
+from Dynamic.WDdetail import WDdetail
+from Dynamic.WDdynamiclist import WDdynamiclist
 from FileHandler.GetToken import WgetToken
 from FileHandler.Getpicture import Getpicture
 from Userinfo.Uaddimages import Uaddimages
@@ -62,7 +65,7 @@ from Appointment.WAPfinish import WAPfinish
 #define("port", default=80, help="run on the given port", type=int)
 from RegistandLogin.WRegisterHandler import WRegisterHandler
 from RegistandLogin.WloginHandler import WLoginHandler
-define("port", default=80, help="run on the given port", type=int)
+define("port", default=800, help="run on the given port", type=int)
 
 
 
@@ -116,7 +119,10 @@ class Application(tornado.web.Application):
             (r"/weixin/user/judge", WUserjudge),
             (r"/weixin/getpicurl", Getpicture),
             (r"/weixin/appointment/remind",WAPRemind),
-            (r"/weixin/user/headimage",WUhimgup)
+            (r"/weixin/user/headimage",WUhimgup),
+            (r"/weixin/dynamic/create",WDcreatehandler),
+            (r"/weixin/dynamic/list",WDdynamiclist),
+            (r"/weixin/dynamic/detail",WDdetail),
 
         ]
 

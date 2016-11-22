@@ -2,7 +2,7 @@
 import time
 
 from Database.models import get_db
-from Database.tables import UserImage,Image, WApImage, WAcImage
+from Database.tables import UserImage,Image, WApImage, WAcImage, WDImage
 
 '''
  创建者：兰威 黄鑫晨
@@ -93,6 +93,25 @@ class ImageHandler(object):
         return new_imids
 
     # @staticmethod
+    def insert_wdynamic_image(self, list, wdy_id):
+        '''
+        Args:
+            list: 图片名字的数组
+            ap_id: 微信约拍的ID
+        Returns:
+        '''
+        # 先过滤
+
+        imids = self.insert(list)
+        for i in range(len(imids)):
+            image = WDImage(
+                WDIwdid=wdy_id,
+                WDIimid=imids[i],
+                WDIurl=list[i]
+            )
+            db = get_db()
+            db.merge(image)
+            db.commit()
     def insert_user_image(self, list, uid):
         # type: (object, object) -> object
         '''
@@ -139,6 +158,7 @@ class ImageHandler(object):
             db.commit()
 
     # @staticmethod
+
     def insert_appointment_image(self,list,ap_id):
         '''
 
