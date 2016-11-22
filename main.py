@@ -38,6 +38,7 @@ from FileHandler.GetToken import WgetToken
 from FileHandler.Getpicture import Getpicture
 from Userinfo.Uaddimages import Uaddimages
 from Userinfo.Udeleteimages import Udeleteimages
+from Userinfo.Ugetheadimage import Ugetheadimage
 from Userinfo.Ugetiamge import Ugetimage
 from Userinfo.WUforgotpasswd import WUforgotpasswd
 from Userinfo.WUhimgup import WUhimgup
@@ -123,6 +124,7 @@ class Application(tornado.web.Application):
             (r"/weixin/dynamic/create",WDcreatehandler),
             (r"/weixin/dynamic/list",WDdynamiclist),
             (r"/weixin/dynamic/detail",WDdetail),
+            (r"/weixin/user/getheadimage",Ugetheadimage)
 
         ]
 
