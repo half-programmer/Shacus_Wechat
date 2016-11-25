@@ -27,12 +27,15 @@ class WDmodel(object):
             u_himg = db.query(UserImage).filter(UserImage.UIuid == u_id,UserImage.UIvalid == 1).one()
             himg_url = u_himg.UIurl
             auth = AuthKeyHandler()
+            user = db.query(User).filter(User.Uid == u_id, User.Uvalid == 1).one()
+            u_alias = user.Ualais
             ret_ap = dict(
                 contents=wd.WDcontents,
                 headimg=auth.download_abb_url(himg_url),
                 uid=u_id,
                 # detailurl='www.baidu.com'  #当前传的是一个假的值
                 # sponsorid=wap.WAPsponsorid,
+                alias=u_alias,
                 did=wd.WDid,
                 dimg=auth.download_url(picurl),
             )
