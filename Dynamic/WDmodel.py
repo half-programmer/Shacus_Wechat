@@ -92,6 +92,7 @@ class WDmodel(object):
                 did=wd.WDid,
                 dimgs=pic_urls,
                 dimgs_abb=pic_urls_abb,
+                dtime=wd.WDcreateT
             )
             return ret_ap
         except Exception, e:
