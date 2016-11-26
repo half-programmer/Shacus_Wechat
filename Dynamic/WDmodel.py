@@ -92,7 +92,7 @@ class WDmodel(object):
                 did=wd.WDid,
                 dimgs=pic_urls,
                 dimgs_abb=pic_urls_abb,
-                dtime=wd.WDcreateT.strftime('%Y-%m-%d %h:%m'),
+                dtime=wd.WDcreateT.strftime('%Y-%m-%d %H:%M'),
             )
             return ret_ap
         except Exception, e:
