@@ -20,15 +20,13 @@ class WDdynamiclist(BaseHandler):
         phone = self.get_argument("vali")
         row = self.get_argument('row')
         wdmodel = WDmodel()
+        retdata = []
         try:
             exist = self.db.query(User).filter(User.Utel == phone,User.Uvalid == 1).one()
             dynamics = self.db.query(WDynamic).filter(WDynamic.WDvalid == 1).order_by(desc(WDynamic.WDcreateT)).offset(int(row)).limit(10).all()
-            picurls = []
             for dynamic in dynamics:
                 data = self.db.query(WDImage).filter(WDImage.WDIwdid == dynamic.WDid,WDImage.WDIvalid == 1).all()
-                if data:
-                    picurls.append(data[0].WDIurl)
-            retdata = wdmodel.wd_model_simply_more(dynamics,picurls)
+                retdata.append(wdmodel.wd_model_multiply_one(dynamic,data))
             self.retjson['code'] = '20011'
             self.retjson['contents'] = retdata
 

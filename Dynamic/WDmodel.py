@@ -76,10 +76,12 @@ class WDmodel(object):
             himg_url = u_himg.UIurl
             auth = AuthKeyHandler()
             pic_urls = []
+            pic_urls_abb = []
             user = db.query(User).filter(User.Uid == u_id,User.Uvalid == 1).one()
             u_alias = user.Ualais
             for picurl in picurls:
                 pic_urls.append(auth.download_url(picurl.WDIurl))
+                pic_urls_abb.append(auth.download_assign_url(picurl.WDIurl,100,100))
             ret_ap = dict(
                 contents=wd.WDcontents,
                 headimg=auth.download_abb_url(himg_url),
@@ -89,6 +91,7 @@ class WDmodel(object):
                 alias = u_alias,
                 did=wd.WDid,
                 dimgs=pic_urls,
+                dimgs_abb=pic_urls_abb,
             )
             return ret_ap
         except Exception, e:
