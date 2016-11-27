@@ -46,7 +46,8 @@ class WDcreatehandler(BaseHandler):
             print e
             self.retjson["code"] = '20000'
             self.retjson["contents"] = '用户不合法'
-        callback = self.get_argument("jsoncallback")
-        jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
-        self.write(jsonp)
+        # callback = self.get_argument("jsoncallback")
+        # jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
+        # self.write(jsonp)
+            self.write(json.dumps(self.retjson, ensure_ascii=False, indent=2))
 
