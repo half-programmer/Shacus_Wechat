@@ -22,7 +22,7 @@ class WgetToken(BaseHandler):
             self.retjson['uptoken'] = authhandler.get_token_web_one()
         except Exception:
             self.retjson['uptoken'] = u'用户认证出错'
-        #self.write(json.dumps(self.retjson, ensure_ascii=False, indent=2))  # 返回中文
-        callback = self.get_argument("jsoncallback")
-        jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
-        self.write(jsonp)
+        self.write(json.dumps(self.retjson, ensure_ascii=False, indent=2))  # 返回中文
+        # callback = self.get_argument("jsoncallback")
+        # jsonp = "{jsfunc}({json});".format(jsfunc=callback, json=json.dumps(self.retjson, ensure_ascii=False, indent=2))
+        # self.write(jsonp)
