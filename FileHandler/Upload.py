@@ -37,8 +37,14 @@ class AuthKeyHandler:
     def download_url(self,name):
         auth = self.get_auth_key()
         bucket_domain = 'oci8c6557.bkt.clouddn.com'
-        base_url = 'http://%s/%s?imageView2/2/h/1000' % (bucket_domain, name)
+        base_url = 'http://%s/%s?imageView2/2/h/500' % (bucket_domain, name)
         private_url =auth.private_download_url(base_url, expires=3600)
+        return private_url
+    def download_assign_url(self,name,width,heigh):
+        auth = self.get_auth_key()
+        bucket_domain = 'oci8c6557.bkt.clouddn.com'
+        base_url = 'http://{bucket}/{name}?imageView2/1/w/{width}/h/{heigh}'.format(bucket=bucket_domain,name=name,width=width,heigh=heigh)
+        private_url = auth.private_download_url(base_url, expires=3600)
         return private_url
     def download_abb_url(self,name):
         '''
@@ -51,7 +57,7 @@ class AuthKeyHandler:
         '''
         auth = self.get_auth_key()
         bucket_domain = 'oci8c6557.bkt.clouddn.com'
-        base_url = 'http://%s/%s?imageView2/2/w/400' % (bucket_domain, name)
+        base_url = 'http://%s/%s?imageView2/2/w/200' % (bucket_domain, name)
         private_url =auth.private_download_url(base_url, expires=3600)
         #private_url = private_url+"&imageView2/2/w/200"
         return private_url

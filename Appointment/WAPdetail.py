@@ -71,7 +71,8 @@ class WAPdetail(BaseHandler):
                         r_id = apinfos.WAImid
                         user = self.db.query(User).filter(User.Uid == r_id).one()
                         userlist = wechat_user_model_select_simply(user)
-            retdate = wapmodel.wap_model_mutiple(wap,wap_pic,issponsor,isregist,ischoosed,userlist)
+
+            retdate = wapmodel.wap_model_mutiple(wap,wap_pic,issponsor,isregist,ischoosed,userlist,m_id)
             self.retjson['contents'] = retdate
             self.retjson['code'] = '10401'
         except Exception,e:

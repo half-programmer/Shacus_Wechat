@@ -60,6 +60,7 @@ class UserImage(Base):
     UIuid = Column(Integer,ForeignKey("User.Uid", onupdate="CASCADE"))
     UIimid = Column(Integer,ForeignKey("Image.IMid", onupdate="CASCADE"), primary_key=True)
     UIurl = Column(VARCHAR(128))
+    UIvalid = Column(Boolean, default=1, nullable=False)
 
 
 class WCourse(Base):
@@ -104,8 +105,8 @@ class WAppointment(Base):
     WAPtype = Column(Boolean, nullable=False, default=0)  # 约拍类型，模特约摄影师(1)或摄影师约模特(0)
     WAPvalid = Column(Boolean, default=1, nullable=False)
     WAPregistN = Column(Integer, nullable=False, default=0)
-    WAPstatus = Column(Integer, nullable=False, default=0)  # 1为发布中，2为已确定约拍对象(进行中) 3为一方已结束 4为两方都结束
-
+    WAPstatus = Column(Integer, nullable=False, default=0)  # 1为发布中，2为已确 定约拍对象(进行中) 3为一方已结束 4为两方都结束
+    WAPremind = Column(Boolean,nullable=False,default=0)
 
 class WApImage(Base):
     __tablename__ = 'WApImage'
@@ -269,4 +270,28 @@ class NewChoosed(Base):
     uid = Column(Integer, ForeignKey('User.Uid', onupdate='CASCADE'))
     choosed = Column(Boolean, nullable=False, default=0)  # 0为没有新选择， 1则有新选择
 
+class WDynamic(Base):
+    '''
+    @author : 兰威
+    @name : 发布动态的详细信息
+    '''
+    __tablename__ = 'WDynamic'
+
+    WDid = Column(Integer, primary_key=True)  #动态id
+    WDsponsorid = Column(Integer, ForeignKey('User.Uid', onupdate='CASCADE'))  # 动态发起者
+    WDcreateT = Column(DateTime(timezone=True), default=func.now())  # 动态创建时间
+    WDcontents = Column(VARCHAR(256))  #动态描述
+    WDvalid = Column(Boolean, default=1, nullable=False) #动态是否有效
+
+class WDImage(Base):
+    '''
+     @author : 兰威
+    @name : 动态图片
+    '''
+    __tablename__ ='WDImage'
+
+    WDIwdid = Column(Integer, ForeignKey("WDynamic.WDid", onupdate="CASCADE"))
+    WDIimid = Column(Integer, ForeignKey("Image.IMid", onupdate="CASCADE"), primary_key=True)
+    WDIurl = Column(VARCHAR(128))
+    WDIvalid = Column(Boolean, default=1, nullable=False)
 

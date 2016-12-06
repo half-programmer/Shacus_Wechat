@@ -2,7 +2,7 @@
 import time
 
 from Database.models import get_db
-from Database.tables import UserImage,Image, WApImage, WAcImage
+from Database.tables import UserImage,Image, WApImage, WAcImage, WDImage
 
 '''
  创建者：兰威 黄鑫晨
@@ -77,6 +77,7 @@ class ImageHandler(object):
         '''
         db = get_db()
         new_imids=[]
+        imid = ''
         for img_name in list:  # 第一步，向Image里表里插入
             image = Image(
                     IMvalid=1,
@@ -85,13 +86,34 @@ class ImageHandler(object):
                 )
             db.merge(image)
             db.commit()
-            new_img = db.query(Image).filter(Image.IMname == img_name).one()
-            imid = new_img.IMid
+            new_imgs = db.query(Image).filter(Image.IMname == img_name).all()
+            for new_img in new_imgs:
+                imid = new_img.IMid
             new_imids.append(imid)
         return new_imids
 
     # @staticmethod
+    def insert_wdynamic_image(self, list, wdy_id):
+        '''
+        Args:
+            list: 图片名字的数组
+            ap_id: 微信约拍的ID
+        Returns:
+        '''
+        # 先过滤
+
+        imids = self.insert(list)
+        for i in range(len(imids)):
+            image = WDImage(
+                WDIwdid=wdy_id,
+                WDIimid=imids[i],
+                WDIurl=list[i]
+            )
+            db = get_db()
+            db.merge(image)
+            db.commit()
     def insert_user_image(self, list, uid):
+        # type: (object, object) -> object
         '''
 
         Args:
@@ -136,6 +158,7 @@ class ImageHandler(object):
             db.commit()
 
     # @staticmethod
+
     def insert_appointment_image(self,list,ap_id):
         '''
 
@@ -161,8 +184,9 @@ class ImageHandler(object):
 
     def change_user_headimage(self,newimage,uid):
         db = get_db()
-        images = db.query(UserImage).filter(UserImage.UIuid == uid).all()
+        images = db.query(UserImage).filter(UserImage.UIuid == uid,UserImage.UIvalid == 1).all()
         for image in images:
+            image.UIvalid = 0
             image_id = image.UIimid
             im = db.query(Image).filter(Image.IMid == image_id).one()
             if im.IMvalid == 1:

@@ -6,6 +6,8 @@
 '''
 import json
 
+from sqlalchemy import desc
+
 from BaseHandlerh import BaseHandler
 from Database.tables import User, WApInfo, WAppointment, Homepageimage
 from FileHandler.Upload import AuthKeyHandler
@@ -27,7 +29,7 @@ class UHandler(BaseHandler):
         comments = []
         try:
             # 用户作为摄影师参加的约拍
-            asphotoers = self.db.query(WApInfo).filter(WApInfo.WAIpid == uid).all()
+            asphotoers = self.db.query(WApInfo).filter(WApInfo.WAIpid == uid).order_by(desc(WApInfo.WAImcommentT)).all()
             for each in asphotoers:
                 first = asphotoers[0]  # 如果是空直接抛出异常
                 # 模特对摄影师的评论
@@ -63,7 +65,7 @@ class UHandler(BaseHandler):
             self.retjson['contents'] = u"该用户作为摄影师没有发布过约拍"
         try:
             # 用户作为模特参加的约拍
-            asmodels = self.db.query(WApInfo).filter(WApInfo.WAImid == uid).all()
+            asmodels = self.db.query(WApInfo).filter(WApInfo.WAImid == uid).order_by(desc(WApInfo.WAIpcommentT)).all()
             first = asmodels[0]  # 如果是空直接抛出异常
             for each in asmodels:
                 # 摄影师对模特的评论:
@@ -144,10 +146,13 @@ class UHandler(BaseHandler):
                         user_other = self.db.query(User).filter(User.Uid == uid_other).one()
                         u_alais_other = user_other.Ualais
                         usex = user_other.Usex
+                        sign = user_other.Usign
                         if usex:
                             self.retjson['sex'] = int(usex)
                         if u_alais_other:
                             self.retjson['alais'] = u_alais_other
+                        if sign:
+                            self.retjson['sign'] = sign
                         self.get_comment(uid_other)
                         auth_key_handler = AuthKeyHandler()
                         img_tokens = []
