@@ -84,6 +84,7 @@ class AcInfoHandler(BaseHandler):
                     registN=exist.WACregistN,
                     status=exist.WACstatus,
                     picurls=picurls,
+                    usercontact = exist.WACusercontact,    #12.10增加
                 )
                 self.retjson = activity
         except Exception, e:

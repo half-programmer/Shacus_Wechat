@@ -23,3 +23,21 @@ class ACmodelHandler:
         WACcontent=activity.WACcontent[0:12],
         )
         return ac_simply_info
+
+    # def Verify_Model(self,activity,retdata):
+    #     '''
+    #
+    #     Args:
+    #         activity:
+    #         retdata:
+    #
+    #     Returns:
+    #        返回审核模型
+    #     '''
+    #     auth=AuthKeyHandler()
+    #     aclurl =get_db().query(WAcImage).filter(WAcImage.WACIacid == activity.WACid).all()
+    #     Acurl=auth.download_url(aclurl[0].WACIurl)
+    #     Verify_Model = dict{
+    #
+    #
+    #     }

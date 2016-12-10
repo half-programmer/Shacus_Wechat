@@ -181,8 +181,8 @@ class WActivity(Base):  # 活动表
     WACminp = Column(Integer,nullable=False, default=100)  # 活动报名人上限
     WACregistN = Column(Integer,nullable=False, default=0)  # 报名人数
     WACstatus =Column(Integer, nullable=False, default=0)  # 活动状态，1为报名中，2为进行中，3为已结束
-    WACvalid = Column(Boolean, nullable=False, default=1)  # 活动是否已经删除, 1为有效
-
+    WACvalid = Column(Boolean, nullable=False, default=0)  # 活动是否已经删除, 1为有效
+    WACusercontact = Column(CHAR(32),nullable=False)
 
 class WAcImage(Base):
     __tablename__ = "WAcImage"

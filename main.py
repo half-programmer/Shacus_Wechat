@@ -12,6 +12,9 @@ import tornado.web
 from sqlalchemy.orm import scoped_session, sessionmaker
 from tornado.options import define, options
 
+from Activity.WAcPassVerify import WAcPassVerify
+from Activity.WAcUserCreateHandler import AcUserCreateHandler
+from Activity.WAcVerify import WAcVerify
 from Appointment.WAPAuthdelete import WAPAuthdelete
 from Activity.AcAuthHandler import AcAuthHandler
 from Appointment.Newchoosed import NewChoosedHandler
@@ -66,7 +69,7 @@ from Appointment.WAPfinish import WAPfinish
 #define("port", default=80, help="run on the given port", type=int)
 from RegistandLogin.WRegisterHandler import WRegisterHandler
 from RegistandLogin.WloginHandler import WLoginHandler
-define("port", default=800, help="run on the given port", type=int)
+define("port", default=80, help="run on the given port", type=int)
 
 
 
@@ -124,7 +127,10 @@ class Application(tornado.web.Application):
             (r"/weixin/dynamic/create",WDcreatehandler),
             (r"/weixin/dynamic/list",WDdynamiclist),
             (r"/weixin/dynamic/detail",WDdetail),
-            (r"/weixin/user/getheadimage",Ugetheadimage)
+            (r"/weixin/user/getheadimage",Ugetheadimage),
+            (r"/weixin/activity/userpublishactivity",AcUserCreateHandler),
+            (r"/weixin/activity/Acverify",WAcVerify),
+            (r"/weixin/activity/PassAcverify", WAcPassVerify),
 
         ]
 

@@ -12,12 +12,13 @@ from sqlalchemy import desc
 from BaseHandlerh import  BaseHandler
 from Database.tables import WActivity, User, WAcImage, UserImage, Image
 from Activity.WAcmodel import ACmodelHandler
+from datetime import datetime
 
 class AskActivity(BaseHandler): #关于用户的一系列活动
     retjson = {'code': '400', 'contents': 'none'}
     def get(self):
             try:
-                data = self.db.query(WActivity).filter(WActivity.WACvalid == 1).order_by(desc(WActivity.WACcreateT)).limit(5).all()
+                data = self.db.query(WActivity).filter(WActivity.WACvalid == 1,WActivity.WACendT>datetime.now()).order_by(desc(WActivity.WACcreateT)).all()#12.10去掉了Limit5
                 retdata = []
                 for item in data:
                         retdata01 = ACmodelHandler.ac_Model_simply(item, retdata)

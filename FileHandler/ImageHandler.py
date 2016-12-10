@@ -149,9 +149,9 @@ class ImageHandler(object):
         imids = self.insert(list)
         for i in range(len(imids)):
             image = WAcImage(
-                ACIacid=ac_id,
-                ACIimid=imids[i],
-                ACIurl=list[i]
+                WACIacid=ac_id,
+                WACIimid=imids[i],
+                WACIurl=list[i]
             )
             db = get_db()
             db.merge(image)
