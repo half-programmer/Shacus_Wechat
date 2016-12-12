@@ -17,7 +17,7 @@ class WAcVerify(BaseHandler): #审核活动的列表
                 retdata01 = ACmodelHandler.ac_Model_simply(item, retdata)
                 self.retjson['code'] = '10303'
                 retdata.append(retdata01)
-                self.retjson['contents'] = retdata
+                self.retjson['content'] = retdata
         except Exception, e:
             print e
             self.retjson['code'] = '10304'

@@ -79,7 +79,7 @@ class AcUserCreateHandler(BaseHandler):  # 创建活动
                             self.db.commit()
                             break
                         self.retjson['code']='10312'
-                        self.retjson['contents'] = '创建约拍成功'
+                        self.retjson['contents'] = '创建成功，您的活动即将审核，我们将会短信通知您'
 
                     except Exception, e:
                         print e
