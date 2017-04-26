@@ -11,7 +11,7 @@ from FileHandler.ImageHandler import ImageHandler
 
 class ApCompanionHandler(BaseHandler):
     retjson = {'code':'', 'contents':''}
-    def post(self):
+    def get(self):
         type = self.get_argument('type')
         if type == '10900':   # 发布约拍伴侣
             ApcTitle = self.get_argument('title')
