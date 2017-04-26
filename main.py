@@ -15,6 +15,7 @@ from tornado.options import define, options
 from Activity.WAcPassVerify import WAcPassVerify
 from Activity.WAcUserCreateHandler import AcUserCreateHandler
 from Activity.WAcVerify import WAcVerify
+from Apcompanions.ApCompanionHandler import ApCompanionHandler
 from Appointment.WAPAuthdelete import WAPAuthdelete
 from Activity.AcAuthHandler import AcAuthHandler
 from Appointment.Newchoosed import NewChoosedHandler
@@ -131,6 +132,7 @@ class Application(tornado.web.Application):
             (r"/weixin/activity/userpublishactivity",AcUserCreateHandler),
             (r"/weixin/activity/Acverify",WAcVerify),
             (r"/weixin/activity/PassAcverify", WAcPassVerify),
+            (r"/weixin/appointment/companion", ApCompanionHandler),
 
         ]
 

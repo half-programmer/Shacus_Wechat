@@ -2,7 +2,7 @@
 import time
 
 from Database.models import get_db
-from Database.tables import UserImage,Image, WApImage, WAcImage, WDImage
+from Database.tables import UserImage,Image, WApImage, WAcImage, WDImage, WApCompanionImage
 
 '''
  创建者：兰威 黄鑫晨
@@ -194,7 +194,7 @@ class ImageHandler(object):
         db.commit()
         self.insert_user_image(newimage,uid)
 
-        def insert_appointment_image(self, list, ap_id):
+    def insert_appointment_image(self, list, ap_id):
             '''
 
             Args:
@@ -216,6 +216,28 @@ class ImageHandler(object):
                 db.merge(image)
                 db.commit()
 
+    def insert_companion_image(self, list, Companion_id):  # 插入约拍伴侣图片
+                    '''
+
+                    Args:
+                        list: 图片的名字的数组
+                        ac_id: 约拍伴侣的id
+
+                    Returns:
+
+                    '''
+                    imagehandler = ImageHandler()
+                    imids = imagehandler.insert(list)
+                    for i in range(len(imids)):
+                        image = WApCompanionImage(
+                            WAPCid=Companion_id,
+                            WAPCimid=imids[i],
+                            WAPCurl=list[i],
+                            WAPCvalid=1
+                        )
+                        db = get_db()
+                        db.merge(image)
+                        db.commit()
 
 
 

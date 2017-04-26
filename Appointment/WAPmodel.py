@@ -8,7 +8,7 @@ r :兰威
 @datatime：2016.10.10
 '''
 from Database.models import get_db
-from Database.tables import User, WApImage, WApFinish, UserImage
+from Database.tables import User, WApImage, WApFinish, UserImage, WApCompanionImage
 from FileHandler.Upload import AuthKeyHandler
 
 class WAPmodel(object):
@@ -146,6 +146,21 @@ class WAPmodel(object):
             key=keys,
         )
         return ret_ap
+
+    def ApCompanion(clas, Companion, retdata):
+        auth = AuthKeyHandler()
+        Companion_imgs = get_db().query(WApCompanionImage).filter(WApCompanionImage.WAPCid == Companion.WAPCid).all()
+        Imgs = []
+        for item in Companion_imgs:
+            Imgs.append(auth.download_url(item.CompanionImgurl))
+        ApCompanion_model = dict(
+            CompanionId=Companion.WAPCid,
+            CompanionTitle=Companion.WAPCname,
+            CompanionContent=Companion.WAPCServeintro,
+            CompanionUrl=Companion.WAPCContact,
+            CompanionPic=Imgs,
+        )
+        retdata.append(ApCompanion_model)
 
 
 
