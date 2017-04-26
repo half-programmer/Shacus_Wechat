@@ -152,7 +152,7 @@ class WAPmodel(object):
         Companion_imgs = get_db().query(WApCompanionImage).filter(WApCompanionImage.WAPCid == Companion.WAPCid).all()
         Imgs = []
         for item in Companion_imgs:
-            Imgs.append(auth.download_url(item.CompanionImgurl))
+            Imgs.append(auth.download_url(item.WAPCurl))
         ApCompanion_model = dict(
             CompanionId=Companion.WAPCid,
             CompanionTitle=Companion.WAPCname,
