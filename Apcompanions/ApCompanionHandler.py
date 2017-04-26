@@ -35,7 +35,7 @@ class ApCompanionHandler(BaseHandler):
                                                         WApCompanions.WAPCContact == ApcUrl,
                                                         WApCompanions.WAPCvalid == 1).one()
                 image = ImageHandler()
-                image.insert_companion_image(Apcimg, OneCompanion.ApCompanionid)
+                image.insert_companion_image(Apcimg, OneCompanion.WAPCid)
                 self.db.commit()
                 self.retjson['code'] = '10900'
                 self.retjson['contents'] = '约拍伴侣创建成功'
