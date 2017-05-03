@@ -50,6 +50,7 @@ class ApCompanionHandler(BaseHandler):
                 post_data=urllib.urlencode(values)
                 url = 'http://114.215.16.151:81/appointment/companion'
                 req = urllib2.Request(url, post_data)
+                response = urllib2.urlopen(req)
                 self.db.commit()
                 self.retjson['code'] = '10900'
                 self.retjson['contents'] = '约拍伴侣创建成功'
