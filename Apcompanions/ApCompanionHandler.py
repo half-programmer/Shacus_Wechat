@@ -44,7 +44,7 @@ class ApCompanionHandler(BaseHandler):
                     'title': ApcTitle,
                     'orgnazation': ApOrc,
                     'content': ApcContent,
-                    'conmpanion': ApcUrl,
+                    'conmpanionUrl': ApcUrl,
                     'companionImgs[]': Apcimg,
                 }
                 post_data=urllib.urlencode(values)
