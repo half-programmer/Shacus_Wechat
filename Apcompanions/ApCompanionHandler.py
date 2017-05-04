@@ -39,18 +39,19 @@ class ApCompanionHandler(BaseHandler):
                                                         WApCompanions.WAPCvalid == 1).one()
                 image = ImageHandler()
                 image.insert_companion_image(Apcimg, OneCompanion.WAPCid)
-                values={
+                values = {
                     'type': '10900',
                     'title': ApcTitle,
                     'orgnazation': ApOrc,
                     'content': ApcContent,
-                    'conmpanionUrl': ApcUrl,
+                    'companionUrl': ApcUrl,
                     'companionImgs[]': Apcimg,
                 }
                 post_data=urllib.urlencode(values)
                 url = 'http://114.215.16.151:81/appointment/companion'
                 req = urllib2.Request(url, post_data)
                 response = urllib2.urlopen(req)
+                print '同步约拍伴侣成功'
                 self.db.commit()
                 self.retjson['code'] = '10900'
                 self.retjson['contents'] = '约拍伴侣创建成功'
