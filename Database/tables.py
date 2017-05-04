@@ -258,6 +258,16 @@ class WAcAuth(Base):
     WAAacid = Column(Integer, ForeignKey('WActivity.WACid', onupdate='CASCADE'))  # 活动ID
     WAAused = Column(Boolean, nullable=False, default=0)  # 为0则未用， 1则用过
 
+class WApAuth(Base):
+    # 记录约拍伴侣发布码
+    __tablename__ = 'WApAuth'
+
+    WApAid = Column(Integer, primary_key=True)
+    WApauth = Column(VARCHAR(32), nullable=False)
+    WAAPCid = Column(Integer, ForeignKey('WApCompanions.WAPCid', onupdate='CASCADE'))  # 伴侣ID
+    WApAused = Column(Boolean, nullable=False, default=0)  # 为0则未用， 1则用过
+
+
 
 class NewChoosed(Base):
     '''

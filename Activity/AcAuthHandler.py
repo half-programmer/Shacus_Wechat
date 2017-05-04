@@ -34,7 +34,7 @@ class AcAuthHandler(BaseHandler):
         auth_string = auth_handler.get_auth()
         retjson = {'auth': auth_string}
         new_ac_auth = WAcAuth(
-          WAauth = auth_string
+          WAauth=auth_string
         )
         self.db.merge(new_ac_auth)
         try:
