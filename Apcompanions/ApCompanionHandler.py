@@ -51,13 +51,16 @@ class ApCompanionHandler(BaseHandler):
                                                                     WApCompanions.WAPCvalid == 1).one()
                             image = ImageHandler()
                             image.insert_companion_image(Apcimg, OneCompanion.WAPCid)
+                            apcimg=[]
+                            for item in Apcimg:
+                                apcimg.append(item)
                             values = {
                                 'type': '10900',
                                 'title': ApcTitle,
                                 'orgnazation': ApOrc,
                                 'content': ApcContent,
                                 'companionUrl': ApcUrl,
-                                'companionImgs[]': Apcimg,
+                                'companionImgs[]': apcimg,
                             }
                             post_data=urllib.urlencode(values)
                             url = 'http://114.215.16.151:81/appointment/companion'
