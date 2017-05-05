@@ -29,7 +29,7 @@ class ApCompanionHandler(BaseHandler):
                 # 有该认证
                 if exist:
                     #  已经被使用
-                    if exist.WAAused == 1:
+                    if exist.WApAused == 1:
                         self.retjson['code'] = '401'
                         self.retjson['contents'] = "该权限已被其他活动使用，请重新申请"
                     # 未被使用，可以使用
